@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anjali Singh | Portfolio</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+    <style>
+        /* Basic Reset and Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Roboto', sans-serif;
+            color: #333;
+            background-color: #f9f9f9;
+            scroll-behavior: smooth;
+        }
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Navbar */
+        nav {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        nav .nav-links {
+            display: flex;
+            justify-content: space-around;
+            list-style: none;
+        }
+        nav .nav-links li a {
+            color: #fff;
+            font-weight: bold;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(to right, #007bff, #00c6ff);
+            color: white;
+            padding: 100px 20px;
+            text-align: center;
+        }
+        .hero h1 {
+            font-size: 2.5em;
+        }
+        .hero p {
+            margin-top: 10px;
+            font-size: 1.2em;
+        }
+        .hero button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: white;
+            color: #007bff;
+            border: none;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .hero button:hover {
+            background-color: #f1f1f1;
+        }
+
+        /* Section Styles */
+        section {
+            padding: 60px 20px;
+            text-align: center;
+        }
+        .section-title {
+            font-size: 2em;
+            margin-bottom: 20px;
+            color: #007bff;
+        }
+
+        /* Projects Section */
+        .projects .project-card {
+            background: #fff;
+            padding: 20px;
+            margin: 10px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: 0.3s;
+        }
+        .projects .project-card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Skills Section */
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+        .skills .skill-item {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            margin-top: 40px;
+        }
+        footer a {
+            color: #00c6ff;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2em;
+            }
+            .hero p {
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Anjali Singh</h1>
+        <p>Software Engineer | Passionate about Technology</p>
+        <button onclick="window.location.href='#contact'">Contact Me</button>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <h2 class="section-title">About Me</h2>
+        <p>Hello! I’m Anjali, a software engineer with a passion for building impactful projects. I specialize in web development, data analysis, and cloud technologies. I love learning new things and solving complex problems!</p>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+        <h2 class="section-title">Projects</h2>
+        <div class="project-card">
+            <h3>Project One</h3>
+            <p>A brief description of the project and the technologies used.</p>
+            <a href="#">View Project</a>
+        </div>
+        <div class="project-card">
+            <h3>Project Two</h3>
+            <p>A brief description of the project and the technologies used.</p>
+            <a href="#">View Project</a>
+        </div>
+        <!-- Add more project cards as needed -->
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <h2 class="section-title">Skills</h2>
+        <div class="skills">
+            <div class="skill-item">HTML</div>
+            <div class="skill-item">CSS</div>
+            <div class="skill-item">JavaScript</div>
+            <div class="skill-item">React</div>
+            <div class="skill-item">Node.js</div>
+            <div class="skill-item">Python</div>
+            <!-- Add more skills as needed -->
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <h2 class="section-title">Contact</h2>
+        <p>If you’d like to reach out, feel free to contact me via email or connect on LinkedIn.</p>
+        <p>Email: anjali.singh@example.com</p>
+        <p>LinkedIn: <a href="#">linkedin.com/in/anjali-singh</a></p>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Anjali Singh. All rights reserved.</p>
+        <p>Find me on <a href="#">GitHub</a> | <a href="#">Twitter</a> | <a href="#">LinkedIn</a></p>
+    </footer>
+
+</body>
+</html>
