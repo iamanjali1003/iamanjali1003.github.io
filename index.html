@@ -3,7 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Anjali</title>
+    <title>Anjali &mdash; Software Engineer</title>
+    <meta name="description" content="Anjali &mdash; Information Science &amp; Engineering student in Bengaluru. QA Intern at Scaler AI Labs. Full-stack and backend engineering with React, Next.js, Node.js, Java and Spring Boot.">
+    <meta property="og:title" content="Anjali &mdash; Software Engineer">
+    <meta property="og:description" content="QA Intern at Scaler AI Labs. Full-stack and backend engineering with React, Next.js, Node.js, Java and Spring Boot.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://iamanjali1003.github.io">
+    <meta name="twitter:card" content="summary">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -380,6 +386,24 @@
             text-decoration-color: var(--accent-border);
         }
 
+        .badge-current,
+        .project-live {
+            display: inline-block;
+            font-family: var(--font-mono);
+            font-size: 11px;
+            font-weight: 500;
+            color: var(--green);
+            background: var(--green-subtle);
+            border: 1px solid var(--green-border);
+            border-radius: 999px;
+            padding: 2px 8px;
+            margin-left: 8px;
+            vertical-align: middle;
+            letter-spacing: 0.02em;
+        }
+
+        .project-live:hover { color: var(--green); border-color: var(--green); }
+
         .projects-grid {
             display: grid;
             grid-template-columns: 1fr;
@@ -715,13 +739,23 @@
 
         <section id="about">
             <p class="section-label">About</p>
-            <p class="about-text">B.E. in <strong>Information Science & Engineering</strong> at JSS Academy of Technical Education, Bengaluru. I focus on <strong>backend engineering</strong> with Java and Spring Boot, and build <strong>full-stack applications</strong> with Next.js and TypeScript. I contribute to open source through Hacktoberfest and solve algorithmic problems on CodeChef and Codeforces.</p>
+            <p class="about-text">B.E. in <strong>Information Science & Engineering</strong> at JSS Academy of Technical Education, Bengaluru. I focus on <strong>backend engineering</strong> with Java and Spring Boot, and build <strong>full-stack applications</strong> with Next.js and TypeScript. Currently a <strong>QA Intern at Scaler AI Labs</strong> in Bengaluru. I contribute to open source through Hacktoberfest and solve algorithmic problems on CodeChef and Codeforces.</p>
         </section>
 
         <hr class="divider">
 
         <section id="experience">
             <p class="section-label">Experience</p>
+            <div class="experience-card" style="margin-bottom: 16px;">
+                <div class="experience-header">
+                    <h3>QA Intern <span class="badge-current">Current</span></h3>
+                    <span class="date">Sep 2026 &mdash; Nov 2026</span>
+                </div>
+                <p class="experience-company">Scaler AI Labs &middot; Bengaluru, Karnataka</p>
+                <ul class="experience-list">
+                    <li>Full-time, on-site quality assurance internship at Scaler AI Labs. Recently started &mdash; project highlights to follow.</li>
+                </ul>
+            </div>
             <div class="experience-card">
                 <div class="experience-header">
                     <h3><a href="https://drive.google.com/file/d/1I1JZLDGKprwv0Qwg48M_Yq4-xte1_kWC/view" target="_blank">Software Engineering Job Simulation</a></h3>
@@ -744,10 +778,22 @@
             <div class="projects-grid">
                 <div class="project-card">
                     <div class="project-header">
+                        <h3><a href="https://github.com/iamanjali1003/pixstory" target="_blank">pixStory</a><a class="project-live" href="http://Pixstory-env-1.eba-55bqi3ks.ap-south-1.elasticbeanstalk.com" target="_blank">Live</a></h3>
+                        <span class="arrow">&nearr;</span>
+                    </div>
+                    <p class="project-tech">React &middot; TypeScript &middot; Node.js &middot; Express &middot; MongoDB &middot; AWS</p>
+                    <ul class="project-list">
+                        <li>Built and <strong>deployed</strong> a full-stack photo gallery (<strong>React</strong>, <strong>Node.js</strong>/<strong>Express</strong>, <strong>MongoDB Atlas</strong>) to <strong>AWS Elastic Beanstalk</strong>, serving the SPA and REST API from a single origin</li>
+                        <li>Designed direct-to-<strong>S3</strong> uploads with <strong>presigned URLs</strong> so image bytes bypass the server, delivered over a <strong>CloudFront</strong> CDN fronting a private bucket locked by Origin Access Control</li>
+                        <li>Implemented <strong>JWT</strong> auth with bcrypt, full-text search on MongoDB text indexes, and like/comment flows with optimistic updates via <strong>TanStack Query</strong></li>
+                    </ul>
+                </div>
+                <div class="project-card">
+                    <div class="project-header">
                         <h3><a href="https://github.com/iamanjali1003/monocv" target="_blank">monoCV</a></h3>
                         <span class="arrow">&nearr;</span>
                     </div>
-                    <p class="project-tech">Next.js 14 &middot; TypeScript &middot; Tailwind CSS &middot; shadcn/ui &middot; Zustand &middot; Zod</p>
+                    <p class="project-tech">Next.js &middot; TypeScript &middot; Tailwind CSS &middot; shadcn/ui &middot; Zustand &middot; Zod</p>
                     <ul class="project-list">
                         <li>Engineered a full-stack resume builder web application with real-time preview, enabling users to create ATS-friendly resumes through an intuitive form interface</li>
                         <li>Implemented PDF export pipeline using @react-pdf/renderer, generating professionally formatted resumes with consistent styling and layout</li>
@@ -789,9 +835,11 @@
                 <div class="skill-category">
                     <h3>Frameworks</h3>
                     <div class="skill-tags">
-                        <span>Spring Boot</span>
-                        <span>Next.js 14</span>
                         <span>React</span>
+                        <span>Next.js</span>
+                        <span>Node.js</span>
+                        <span>Express.js</span>
+                        <span>Spring Boot</span>
                         <span>Tailwind CSS</span>
                         <span>shadcn/ui</span>
                         <span>React Hook Form</span>
@@ -800,23 +848,30 @@
                 <div class="skill-category">
                     <h3>Backend & Databases</h3>
                     <div class="skill-tags">
-                        <span>Apache Kafka</span>
-                        <span>REST APIs</span>
-                        <span>Spring Data JPA</span>
+                        <span>MongoDB</span>
+                        <span>Mongoose</span>
                         <span>MySQL</span>
-                        <span>H2</span>
                         <span>PostgreSQL</span>
+                        <span>Apache Kafka</span>
+                        <span>Spring Data JPA</span>
+                        <span>REST APIs</span>
+                        <span>H2</span>
                     </div>
                 </div>
                 <div class="skill-category">
-                    <h3>Tools & Libraries</h3>
+                    <h3>Cloud &amp; Tools</h3>
                     <div class="skill-tags">
+                        <span>AWS S3</span>
+                        <span>CloudFront</span>
+                        <span>Elastic Beanstalk</span>
+                        <span>EC2</span>
+                        <span>Docker</span>
                         <span>Git</span>
                         <span>Maven</span>
-                        <span>Docker</span>
-                        <span>pnpm</span>
+                        <span>TanStack Query</span>
                         <span>Zustand</span>
                         <span>Zod</span>
+                        <span>JWT</span>
                     </div>
                 </div>
             </div>
@@ -832,7 +887,7 @@
                         <h3>Open-Source Contributor</h3>
                         <span class="date">2024 &mdash; 2025</span>
                     </div>
-                    <p>Completed <a href="https://drive.google.com/file/d/1llP7FIIgWXAP9vZ8Gf6RpLwLQ3OJ6Abw/view" target="_blank">Hacktoberfest 2024</a> (<strong>4+ merged PRs</strong>) and <a href="https://drive.google.com/file/d/1Zkq-ao_LBuOOWMgntiWhTtKd3YttMJng/view" target="_blank">Hacktoberfest 2025</a> (<strong>6+ merged PRs</strong>) &mdash; a month-long celebration of open-source projects, their maintainers, and the entire community of contributors</p>
+                    <p>Completed <a href="https://drive.google.com/file/d/1llP7FIIgWXAP9vZ8Gf6RpLwLQ3OJ6Abw/view" target="_blank">Hacktoberfest 2024</a> (<strong>4+ merged PRs</strong>) and <a href="https://drive.google.com/file/d/1Zkq-ao_LBuOOWMgntiWhTtKd3YttMJng/view" target="_blank">Hacktoberfest 2025</a> (<strong>6+ merged PRs</strong>) across community-maintained repositories</p>
                 </div>
                 <div class="achievement-card cp">
                     <div class="achievement-header">
