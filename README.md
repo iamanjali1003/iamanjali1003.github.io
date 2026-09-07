@@ -12,19 +12,27 @@ manager — open the file in a browser and it runs.
 
 ## Features
 
-- Light and dark themes, with the visitor's choice persisted to `localStorage`
-- Responsive layout that holds up from desktop down to mobile widths
-- Sections for experience, projects, technical skills, achievements, and education
-- Open Graph and Twitter card tags so shared links render a proper preview
+- Monochrome design system built on shadcn/ui tokens (`--background`, `--muted-foreground`,
+  `--border`, `--radius`) — black and white only, no accent colour
+- Light and dark themes that follow the system preference, with the visitor's
+  override persisted to `localStorage`
+- [Lucide](https://lucide.dev) icons inlined as a single SVG sprite — no icon library at runtime
+- Sections for experience, projects, technical skills, achievements, education and contact,
+  with a scroll-spy that highlights the section you are reading
+- Full SEO surface: canonical URL, Open Graph and Twitter card tags, a 1200×630 preview
+  image, `schema.org/Person` JSON-LD, `robots.txt` and `sitemap.xml`
+- Accessible by default: skip link, landmark elements, visible focus rings, and
+  `prefers-reduced-motion` support
 
 ## Tech
 
-| Area     | Choice                                  |
-| -------- | --------------------------------------- |
-| Markup   | HTML5                                   |
-| Styling  | Hand-written CSS with custom properties |
-| Fonts    | Inter, JetBrains Mono (Google Fonts)    |
-| Hosting  | GitHub Pages                            |
+| Area     | Choice                                          |
+| -------- | ----------------------------------------------- |
+| Markup   | HTML5, no framework and no build step           |
+| Styling  | Hand-written CSS using shadcn/ui design tokens  |
+| Icons    | Lucide, inlined as an SVG sprite                |
+| Fonts    | Inter, JetBrains Mono (Google Fonts)            |
+| Hosting  | GitHub Pages                                    |
 
 ## Running it locally
 
@@ -48,7 +56,10 @@ Then visit <http://localhost:8000>.
 
 ```
 .
-├── index.html   # the entire site: markup, styles, and theme script
+├── index.html     # the entire site: markup, styles, icon sprite, theme script
+├── og-image.png   # 1200×630 social preview
+├── robots.txt
+├── sitemap.xml
 └── README.md
 ```
 

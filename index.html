@@ -1,952 +1,619 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Anjali &mdash; Software Engineer</title>
-    <meta name="description" content="Anjali &mdash; Information Science &amp; Engineering student in Bengaluru. QA Intern at Scaler AI Labs. Full-stack and backend engineering with React, Next.js, Node.js, Java and Spring Boot.">
-    <meta property="og:title" content="Anjali &mdash; Software Engineer">
-    <meta property="og:description" content="QA Intern at Scaler AI Labs. Full-stack and backend engineering with React, Next.js, Node.js, Java and Spring Boot.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://iamanjali1003.github.io">
-    <meta name="twitter:card" content="summary">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        :root {
-            --accent: #0068d6;
-            --accent-light: #0080ff;
-            --accent-subtle: rgba(0, 104, 214, 0.1);
-            --accent-border: rgba(0, 104, 214, 0.25);
-            --green: #22c55e;
-            --green-subtle: rgba(34, 197, 94, 0.1);
-            --green-border: rgba(34, 197, 94, 0.25);
-            --amber: #f59e0b;
-            --amber-subtle: rgba(245, 158, 11, 0.1);
-            --amber-border: rgba(245, 158, 11, 0.25);
-            --cyan: #06b6d4;
-            --cyan-subtle: rgba(6, 182, 212, 0.1);
-            --cyan-border: rgba(6, 182, 212, 0.25);
-            --rose: #f43f5e;
-            --rose-subtle: rgba(244, 63, 94, 0.1);
-            --rose-border: rgba(244, 63, 94, 0.25);
-            --max-width: 720px;
-            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
-        }
-
-        [data-theme="dark"] {
-            --bg: #000;
-            --bg-secondary: #0a0a0a;
-            --bg-card: #111;
-            --border: #222;
-            --border-hover: #333;
-            --text-primary: #ededed;
-            --text-secondary: #888;
-            --text-tertiary: #666;
-            --tag-bg: #1a1a1a;
-            --tag-border: #2a2a2a;
-            --nav-bg: rgba(0, 0, 0, 0.8);
-            --code-bg: #1a1a2e;
-        }
-
-        [data-theme="light"] {
-            --bg: #fff;
-            --bg-secondary: #fafafa;
-            --bg-card: #f5f5f5;
-            --border: #e5e5e5;
-            --border-hover: #d4d4d4;
-            --text-primary: #171717;
-            --text-secondary: #525252;
-            --text-tertiary: #a3a3a3;
-            --tag-bg: #f5f5f5;
-            --tag-border: #e5e5e5;
-            --nav-bg: rgba(255, 255, 255, 0.8);
-            --code-bg: #eef2ff;
-        }
-
-        html { scroll-behavior: smooth; }
-
-        body {
-            font-family: var(--font-sans);
-            background: var(--bg);
-            color: var(--text-primary);
-            line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            transition: background 0.3s, color 0.3s;
-        }
-
-        a {
-            color: var(--accent);
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-
-        a:hover { color: var(--accent-light); }
-
-        .container {
-            max-width: var(--max-width);
-            margin: 0 auto;
-            padding: 0 24px;
-        }
-
-        nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 100;
-            background: var(--nav-bg);
-            backdrop-filter: saturate(180%) blur(20px);
-            -webkit-backdrop-filter: saturate(180%) blur(20px);
-            border-bottom: 1px solid var(--border);
-            transition: background 0.3s, border-color 0.3s;
-        }
-
-        nav .container {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            height: 64px;
-        }
-
-        nav .logo {
-            font-weight: 700;
-            font-size: 16px;
-            letter-spacing: -0.02em;
-            color: var(--accent);
-        }
-
-        nav .nav-right {
-            display: flex;
-            align-items: center;
-            gap: 32px;
-        }
-
-        nav .nav-links {
-            display: flex;
-            gap: 28px;
-            list-style: none;
-        }
-
-        nav .nav-links a {
-            font-size: 14px;
-            color: var(--text-secondary);
-            transition: color 0.2s;
-        }
-
-        nav .nav-links a:hover { color: var(--text-primary); }
-
-        .theme-toggle {
-            background: var(--tag-bg);
-            border: 1px solid var(--border);
-            border-radius: 6px;
-            padding: 6px 10px;
-            cursor: pointer;
-            font-size: 16px;
-            line-height: 1;
-            transition: all 0.2s;
-            color: var(--text-primary);
-        }
-
-        .theme-toggle:hover {
-            border-color: var(--accent-border);
-            background: var(--accent-subtle);
-        }
-
-        .mobile-toggle {
-            display: none;
-            background: none;
-            border: none;
-            color: var(--text-primary);
-            cursor: pointer;
-            padding: 8px;
-        }
-
-        .mobile-toggle span {
-            display: block;
-            width: 18px;
-            height: 1.5px;
-            background: var(--text-primary);
-            margin: 4px 0;
-            transition: 0.3s;
-        }
-
-        .mobile-menu {
-            display: none;
-            position: fixed;
-            top: 64px;
-            left: 0;
-            right: 0;
-            background: var(--nav-bg);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--border);
-            padding: 16px 24px;
-            z-index: 99;
-        }
-
-        .mobile-menu.active { display: block; }
-
-        .mobile-menu a {
-            display: block;
-            padding: 12px 0;
-            color: var(--text-secondary);
-            font-size: 15px;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .mobile-menu a:last-child { border-bottom: none; }
-
-        section { padding: 80px 0; }
-
-        .hero {
-            padding-top: 160px;
-            padding-bottom: 80px;
-        }
-
-        .hero h1 {
-            font-size: 48px;
-            font-weight: 700;
-            letter-spacing: -0.04em;
-            line-height: 1.1;
-            margin-bottom: 16px;
-        }
-
-        .hero h1 .accent { color: var(--accent); }
-
-        .hero .subtitle {
-            font-size: 18px;
-            color: var(--text-secondary);
-            line-height: 1.6;
-            max-width: 540px;
-            margin-bottom: 32px;
-        }
-
-        .hero .links {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-
-        .hero .links a {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 14px;
-            color: var(--text-secondary);
-            padding: 8px 16px;
-            border: 1px solid var(--border);
-            border-radius: 6px;
-            transition: all 0.2s;
-        }
-
-        .hero .links a:hover {
-            color: var(--accent);
-            border-color: var(--accent-border);
-            background: var(--accent-subtle);
-        }
-
-        .hero .links a.primary {
-            background: var(--accent);
-            color: #fff;
-            border-color: var(--accent);
-        }
-
-        .hero .links a.primary:hover {
-            background: var(--accent-light);
-            border-color: var(--accent-light);
-        }
-
-        .hero .ratings {
-            margin-top: 24px;
-            display: flex;
-            gap: 16px;
-            flex-wrap: wrap;
-        }
-
-        .hero .ratings a {
-            font-family: var(--font-mono);
-            font-size: 13px;
-            color: var(--text-tertiary);
-            padding: 4px 12px;
-            border: 1px solid var(--border);
-            border-radius: 4px;
-            background: var(--tag-bg);
-            transition: all 0.2s;
-        }
-
-        .hero .ratings a:hover {
-            border-color: var(--amber-border);
-            background: var(--amber-subtle);
-            color: var(--amber);
-        }
-
-        .section-label {
-            font-size: 13px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            color: var(--accent);
-            margin-bottom: 32px;
-        }
-
-        .divider {
-            border: none;
-            border-top: 1px solid var(--border);
-            margin: 0;
-            transition: border-color 0.3s;
-        }
-
-        .about-text {
-            font-size: 16px;
-            color: var(--text-secondary);
-            line-height: 1.8;
-            max-width: 600px;
-        }
-
-        .about-text strong { color: var(--text-primary); font-weight: 500; }
-
-        .experience-card {
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 24px;
-            background: var(--bg-secondary);
-            transition: all 0.2s;
-            border-left: 3px solid var(--accent);
-        }
-
-        .experience-card:hover { border-color: var(--accent-border); }
-
-        .experience-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 4px;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-
-        .experience-header h3 {
-            font-size: 16px;
-            font-weight: 600;
-            letter-spacing: -0.01em;
-        }
-
-        .experience-header h3 a { color: var(--accent); }
-        .experience-header h3 a:hover { color: var(--accent-light); }
-
-        .experience-header .date {
-            font-family: var(--font-mono);
-            font-size: 13px;
-            color: var(--text-tertiary);
-        }
-
-        .experience-company {
-            font-size: 14px;
-            color: var(--text-secondary);
-            margin-bottom: 16px;
-        }
-
-        .experience-list {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .experience-list li {
-            font-size: 14px;
-            color: var(--text-secondary);
-            line-height: 1.6;
-            padding-left: 16px;
-            position: relative;
-        }
-
-        .experience-list li::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 10px;
-            width: 5px;
-            height: 5px;
-            border-radius: 50%;
-            background: var(--accent);
-        }
-
-        .experience-list strong { color: var(--text-primary); font-weight: 500; }
-
-        .experience-list a {
-            color: var(--accent);
-            text-decoration: underline;
-            text-underline-offset: 3px;
-            text-decoration-color: var(--accent-border);
-        }
-
-        .badge-current,
-        .project-live {
-            display: inline-block;
-            font-family: var(--font-mono);
-            font-size: 11px;
-            font-weight: 500;
-            color: var(--green);
-            background: var(--green-subtle);
-            border: 1px solid var(--green-border);
-            border-radius: 999px;
-            padding: 2px 8px;
-            margin-left: 8px;
-            vertical-align: middle;
-            letter-spacing: 0.02em;
-        }
-
-        .project-live:hover { color: var(--green); border-color: var(--green); }
-
-        .projects-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 16px;
-        }
-
-        .project-card {
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 24px;
-            background: var(--bg-secondary);
-            transition: all 0.2s;
-        }
-
-        .project-card:hover {
-            border-color: var(--cyan-border);
-            box-shadow: 0 0 0 1px var(--cyan-border);
-        }
-
-        .project-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 4px;
-        }
-
-        .project-header h3 { font-size: 16px; font-weight: 600; }
-        .project-header h3 a { color: var(--text-primary); }
-        .project-header h3 a:hover { color: var(--cyan); }
-
-        .project-header .arrow {
-            color: var(--text-tertiary);
-            font-size: 14px;
-            transition: all 0.2s;
-        }
-
-        .project-card:hover .arrow {
-            transform: translate(2px, -2px);
-            color: var(--cyan);
-        }
-
-        .project-tech {
-            font-family: var(--font-mono);
-            font-size: 12px;
-            color: var(--cyan);
-            margin-bottom: 16px;
-            opacity: 0.8;
-        }
-
-        .project-list {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-        }
-
-        .project-list li {
-            font-size: 14px;
-            color: var(--text-secondary);
-            line-height: 1.6;
-            padding-left: 16px;
-            position: relative;
-        }
-
-        .project-list li::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 10px;
-            width: 5px;
-            height: 5px;
-            border-radius: 50%;
-            background: var(--cyan);
-        }
-
-        .project-list strong { color: var(--text-primary); font-weight: 500; }
-
-        .skills-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 24px;
-        }
-
-        .skill-category h3 {
-            font-size: 13px;
-            font-weight: 500;
-            color: var(--text-tertiary);
-            text-transform: uppercase;
-            letter-spacing: 0.06em;
-            margin-bottom: 10px;
-        }
-
-        .skill-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-        }
-
-        .skill-tags span {
-            font-family: var(--font-mono);
-            font-size: 13px;
-            padding: 4px 12px;
-            border: 1px solid var(--tag-border);
-            border-radius: 4px;
-            background: var(--tag-bg);
-            color: var(--text-secondary);
-            transition: all 0.2s;
-        }
-
-        .skill-tags span:hover {
-            border-color: var(--accent-border);
-            color: var(--accent);
-            background: var(--accent-subtle);
-        }
-
-        .achievements-list {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-
-        .achievement-card {
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 20px 24px;
-            background: var(--bg-secondary);
-            transition: all 0.2s;
-        }
-
-        .achievement-card:hover { border-color: var(--border-hover); }
-
-        .achievement-card.opensource { border-left: 3px solid var(--green); }
-        .achievement-card.cp { border-left: 3px solid var(--amber); }
-
-        .achievement-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 8px;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-
-        .achievement-header h3 { font-size: 15px; font-weight: 600; }
-
-        .achievement-header .date {
-            font-family: var(--font-mono);
-            font-size: 13px;
-            color: var(--text-tertiary);
-        }
-
-        .achievement-card p {
-            font-size: 14px;
-            color: var(--text-secondary);
-            line-height: 1.6;
-        }
-
-        .achievement-card a { color: var(--green); }
-        .achievement-card a:hover { color: var(--green); opacity: 0.8; }
-        .achievement-card.cp a { color: var(--amber); }
-        .achievement-card.cp a:hover { color: var(--amber); opacity: 0.8; }
-
-        .achievement-card strong { color: var(--text-primary); font-weight: 500; }
-
-        .rank-badges {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-            margin-top: 10px;
-        }
-
-        .rank-badge {
-            font-family: var(--font-mono);
-            font-size: 12px;
-            padding: 4px 10px;
-            border: 1px solid var(--amber-border);
-            border-radius: 4px;
-            background: var(--amber-subtle);
-            color: var(--amber);
-            transition: all 0.2s;
-            display: inline-block;
-            text-decoration: none;
-        }
-
-        .rank-badge:hover { opacity: 0.8; }
-
-        .education-card {
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 24px;
-            background: var(--bg-secondary);
-            border-left: 3px solid var(--rose);
-            transition: all 0.2s;
-        }
-
-        .education-card h3 { font-size: 16px; font-weight: 600; margin-bottom: 4px; }
-
-        .education-card .degree {
-            font-size: 14px;
-            color: var(--text-secondary);
-            margin-bottom: 4px;
-        }
-
-        .education-card .period {
-            font-family: var(--font-mono);
-            font-size: 13px;
-            color: var(--text-tertiary);
-            margin-bottom: 12px;
-        }
-
-        .education-card .coursework {
-            font-size: 13px;
-            color: var(--text-tertiary);
-            line-height: 1.6;
-        }
-
-        .education-card .coursework strong { color: var(--text-secondary); font-weight: 500; }
-
-        footer {
-            border-top: 1px solid var(--border);
-            padding: 40px 0;
-            text-align: center;
-            transition: border-color 0.3s;
-        }
-
-        footer p { font-size: 13px; color: var(--text-tertiary); }
-
-        footer .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 24px;
-            margin-bottom: 16px;
-            flex-wrap: wrap;
-        }
-
-        footer .footer-links a { font-size: 14px; color: var(--text-secondary); }
-        footer .footer-links a:hover { color: var(--accent); }
-
-        .status-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 13px;
-            font-weight: 500;
-            color: var(--green);
-            padding: 4px 12px;
-            border: 1px solid var(--green-border);
-            border-radius: 20px;
-            background: var(--green-subtle);
-            margin-bottom: 20px;
-        }
-
-        .status-badge .dot {
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background: var(--green);
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.4; }
-        }
-
-        @media (max-width: 640px) {
-            .hero { padding-top: 120px; padding-bottom: 60px; }
-            .hero h1 { font-size: 32px; }
-            .hero .subtitle { font-size: 16px; }
-            .hero .links { gap: 8px; }
-            .hero .links a { padding: 6px 12px; font-size: 13px; }
-            .hero .ratings { gap: 8px; }
-            section { padding: 60px 0; }
-            nav .nav-links { display: none; }
-            .mobile-toggle { display: block; }
-            .experience-header { flex-direction: column; gap: 4px; }
-            .achievement-header { flex-direction: column; gap: 4px; }
-            .skills-grid { grid-template-columns: 1fr; }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Anjali — Software Engineer</title>
+<meta name="description" content="Anjali is a software engineer and Information Science student in Bengaluru, currently a QA Intern at Scaler AI Labs. She builds full-stack applications with React, Next.js, Node.js, Java and Spring Boot on AWS.">
+<meta name="author" content="Anjali">
+<meta name="keywords" content="Anjali, software engineer, full stack developer, React, Next.js, Node.js, Java, Spring Boot, AWS, MongoDB, Bengaluru, QA Intern, Scaler AI Labs">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://iamanjali1003.github.io/">
+
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Anjali">
+<meta property="og:locale" content="en_IN">
+<meta property="og:url" content="https://iamanjali1003.github.io/">
+<meta property="og:title" content="Anjali — Software Engineer">
+<meta property="og:description" content="QA Intern at Scaler AI Labs. Full-stack engineering with React, Next.js, Node.js, Java and Spring Boot on AWS.">
+<meta property="og:image" content="https://iamanjali1003.github.io/og-image.png">
+<meta property="og:image:secure_url" content="https://iamanjali1003.github.io/og-image.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Anjali — Software Engineer. QA Intern at Scaler AI Labs.">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Anjali — Software Engineer">
+<meta name="twitter:description" content="QA Intern at Scaler AI Labs. Full-stack engineering with React, Next.js, Node.js, Java and Spring Boot on AWS.">
+<meta name="twitter:image" content="https://iamanjali1003.github.io/og-image.png">
+<meta name="twitter:image:alt" content="Anjali — Software Engineer. QA Intern at Scaler AI Labs.">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230a0a0a'/%3E%3Ctext x='50' y='72' font-family='Helvetica,Arial,sans-serif' font-size='64' font-weight='700' fill='%23fafafa' text-anchor='middle'%3EA%3C/text%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Anjali",
+  "url": "https://iamanjali1003.github.io/",
+  "image": "https://iamanjali1003.github.io/og-image.png",
+  "jobTitle": "QA Intern",
+  "email": "mailto:iamanjali1003@gmail.com",
+  "worksFor": { "@type": "Organization", "name": "Scaler AI Labs" },
+  "address": { "@type": "PostalAddress", "addressLocality": "Bengaluru", "addressRegion": "Karnataka", "addressCountry": "IN" },
+  "alumniOf": { "@type": "CollegeOrUniversity", "name": "JSS Academy of Technical Education, Bengaluru" },
+  "knowsAbout": ["Software Engineering","React","Next.js","Node.js","TypeScript","Java","Spring Boot","MongoDB","MySQL","Apache Kafka","AWS","Quality Assurance","Data Structures and Algorithms"],
+  "sameAs": [
+    "https://github.com/iamanjali1003",
+    "https://linkedin.com/in/iamanjali1003",
+    "https://leetcode.com/u/iamanjali1003",
+    "https://www.codechef.com/users/iamanjali1003",
+    "https://codeforces.com/profile/iamanjali1003"
+  ]
+}
+</script>
+
+<style>
+/* ---------- shadcn-style tokens, strictly monochrome ---------- */
+:root {
+  --background: 0 0% 100%;
+  --foreground: 0 0% 3.9%;
+  --card: 0 0% 100%;
+  --muted: 0 0% 96.1%;
+  --muted-foreground: 0 0% 45.1%;
+  --accent: 0 0% 96.1%;
+  --border: 0 0% 89.8%;
+  --ring: 0 0% 3.9%;
+  --primary: 0 0% 9%;
+  --primary-foreground: 0 0% 98%;
+  --radius: 0.5rem;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, Menlo, monospace;
+  --container: 768px;
+  color-scheme: light;
+}
+[data-theme="dark"] {
+  --background: 0 0% 3.9%;
+  --foreground: 0 0% 98%;
+  --card: 0 0% 3.9%;
+  --muted: 0 0% 14.9%;
+  --muted-foreground: 0 0% 63.9%;
+  --accent: 0 0% 14.9%;
+  --border: 0 0% 14.9%;
+  --ring: 0 0% 83.1%;
+  --primary: 0 0% 98%;
+  --primary-foreground: 0 0% 9%;
+  color-scheme: dark;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 80px; -webkit-text-size-adjust: 100%; }
+body {
+  font-family: var(--font-sans);
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-size: 14px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: 'cv11', 'ss01';
+}
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; }
+img { max-width: 100%; display: block; }
+
+:focus-visible {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 2px;
+  border-radius: calc(var(--radius) - 2px);
+}
+
+.skip-link {
+  position: absolute; left: -9999px; top: 8px; z-index: 100;
+  background: hsl(var(--primary)); color: hsl(var(--primary-foreground));
+  padding: 8px 16px; border-radius: var(--radius); font-weight: 500;
+}
+.skip-link:focus { left: 8px; }
+
+.container { max-width: var(--container); margin: 0 auto; padding: 0 24px; }
+
+/* ---------- icons ---------- */
+.icon {
+  width: 16px; height: 16px; flex: none;
+  stroke: currentColor; fill: none;
+  stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+}
+.icon-sm { width: 14px; height: 14px; }
+.icon-lg { width: 18px; height: 18px; }
+
+/* ---------- header ---------- */
+header {
+  position: sticky; top: 0; z-index: 50;
+  background: hsl(var(--background) / 0.8);
+  backdrop-filter: saturate(180%) blur(12px);
+  -webkit-backdrop-filter: saturate(180%) blur(12px);
+  border-bottom: 1px solid hsl(var(--border));
+}
+.nav { display: flex; align-items: center; justify-content: space-between; height: 60px; gap: 16px; }
+.nav-brand { font-weight: 600; letter-spacing: -0.02em; font-size: 15px; }
+.nav-links { display: flex; gap: 4px; }
+.nav-links a {
+  font-size: 13px; color: hsl(var(--muted-foreground));
+  padding: 6px 10px; border-radius: calc(var(--radius) - 2px);
+  transition: color .15s, background .15s;
+}
+.nav-links a:hover { color: hsl(var(--foreground)); background: hsl(var(--accent)); }
+.nav-links a.active { color: hsl(var(--foreground)); font-weight: 500; }
+.nav-actions { display: flex; align-items: center; gap: 8px; }
+
+/* ---------- buttons (shadcn) ---------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  height: 36px; padding: 0 14px;
+  border-radius: calc(var(--radius) - 2px);
+  font-size: 13px; font-weight: 500; white-space: nowrap;
+  border: 1px solid transparent; cursor: pointer;
+  transition: background .15s, color .15s, border-color .15s, opacity .15s;
+}
+.btn-primary { background: hsl(var(--primary)); color: hsl(var(--primary-foreground)); }
+.btn-primary:hover { opacity: .9; }
+.btn-outline { border-color: hsl(var(--border)); background: hsl(var(--background)); color: hsl(var(--foreground)); }
+.btn-outline:hover { background: hsl(var(--accent)); }
+.btn-ghost { background: transparent; color: hsl(var(--muted-foreground)); }
+.btn-ghost:hover { background: hsl(var(--accent)); color: hsl(var(--foreground)); }
+.btn-icon { width: 36px; height: 36px; padding: 0; }
+
+/* ---------- sections ---------- */
+main > section.container { padding: 56px 24px; border-bottom: 1px solid hsl(var(--border)); }
+main > section.container:last-of-type { border-bottom: 0; }
+
+.section-head { display: flex; align-items: center; gap: 8px; margin-bottom: 24px; }
+.section-head h2 {
+  font-size: 13px; font-weight: 500; letter-spacing: .06em;
+  text-transform: uppercase; color: hsl(var(--muted-foreground));
+}
+.section-head .icon { color: hsl(var(--muted-foreground)); }
+
+/* ---------- hero ---------- */
+.hero.container { padding: 76px 24px 60px; border-bottom: 1px solid hsl(var(--border)); }
+.badge-status {
+  display: inline-flex; align-items: center; gap: 7px;
+  border: 1px solid hsl(var(--border)); border-radius: 999px;
+  padding: 4px 11px; font-size: 12px; font-weight: 500;
+  color: hsl(var(--muted-foreground)); margin-bottom: 22px;
+}
+.badge-status .dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: hsl(var(--foreground)); animation: pulse 2.4s ease-in-out infinite;
+}
+@keyframes pulse { 0%,100% { opacity: 1 } 50% { opacity: .35 } }
+
+.hero h1 {
+  font-size: clamp(38px, 8vw, 56px); font-weight: 700;
+  letter-spacing: -0.04em; line-height: 1.05; margin-bottom: 16px;
+}
+.hero-role { font-size: 17px; font-weight: 500; margin-bottom: 10px; }
+.hero-bio { font-size: 15px; color: hsl(var(--muted-foreground)); max-width: 60ch; margin-bottom: 20px; }
+.hero-meta {
+  display: flex; flex-wrap: wrap; gap: 6px 18px; margin-bottom: 26px;
+  font-size: 13px; color: hsl(var(--muted-foreground));
+}
+.hero-meta span { display: inline-flex; align-items: center; gap: 6px; }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+
+/* ---------- cards ---------- */
+.card {
+  border: 1px solid hsl(var(--border));
+  border-radius: var(--radius);
+  background: hsl(var(--card));
+  padding: 20px;
+  transition: border-color .15s;
+}
+.card + .card { margin-top: 12px; }
+.card:hover { border-color: hsl(var(--muted-foreground) / .45); }
+
+.card-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 2px; }
+.card-title { font-size: 15px; font-weight: 600; letter-spacing: -0.01em; display: inline-flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.card-date { font-family: var(--font-mono); font-size: 12px; color: hsl(var(--muted-foreground)); white-space: nowrap; }
+.card-sub { font-size: 13px; color: hsl(var(--muted-foreground)); margin-bottom: 14px; }
+
+.badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  border: 1px solid hsl(var(--border)); border-radius: 999px;
+  padding: 1px 9px; font-size: 11px; font-weight: 500;
+  color: hsl(var(--muted-foreground)); letter-spacing: .01em;
+}
+.badge-solid { background: hsl(var(--primary)); color: hsl(var(--primary-foreground)); border-color: hsl(var(--primary)); }
+
+.bullets li {
+  position: relative; padding-left: 18px; margin-bottom: 7px;
+  font-size: 14px; color: hsl(var(--muted-foreground)); line-height: 1.65;
+}
+.bullets li:last-child { margin-bottom: 0; }
+.bullets li::before {
+  content: ''; position: absolute; left: 3px; top: 9px;
+  width: 4px; height: 4px; border-radius: 50%; background: hsl(var(--muted-foreground) / .6);
+}
+.bullets strong { color: hsl(var(--foreground)); font-weight: 500; }
+.bullets a { text-decoration: underline; text-underline-offset: 3px; text-decoration-color: hsl(var(--border)); color: hsl(var(--foreground)); }
+.bullets a:hover { text-decoration-color: hsl(var(--foreground)); }
+
+.tech { font-family: var(--font-mono); font-size: 12px; color: hsl(var(--muted-foreground)); margin-bottom: 14px; }
+
+.link-out { display: inline-flex; align-items: center; gap: 4px; font-size: 12px; font-weight: 500; color: hsl(var(--muted-foreground)); transition: color .15s; }
+.link-out:hover { color: hsl(var(--foreground)); }
+
+/* ---------- skills ---------- */
+.skill-group { margin-bottom: 20px; }
+.skill-group:last-child { margin-bottom: 0; }
+.skill-group h3 {
+  display: flex; align-items: center; gap: 7px;
+  font-size: 12px; font-weight: 500; text-transform: uppercase; letter-spacing: .05em;
+  color: hsl(var(--muted-foreground)); margin-bottom: 10px;
+}
+.tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.tags span {
+  border: 1px solid hsl(var(--border)); border-radius: calc(var(--radius) - 2px);
+  padding: 3px 9px; font-size: 12px; color: hsl(var(--foreground));
+  background: hsl(var(--muted) / .5);
+}
+
+/* ---------- contact ---------- */
+.contact-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+
+footer { border-top: 1px solid hsl(var(--border)); padding: 28px 0 40px; }
+.footer-inner { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
+.footer-links { display: flex; flex-wrap: wrap; gap: 16px; }
+.footer-links a { font-size: 13px; color: hsl(var(--muted-foreground)); transition: color .15s; }
+.footer-links a:hover { color: hsl(var(--foreground)); }
+.footer-note { font-size: 12px; color: hsl(var(--muted-foreground)); font-family: var(--font-mono); }
+
+@media (max-width: 640px) {
+  .nav-links { display: none; }
+  .hero.container { padding: 48px 24px 40px; }
+  main > section.container { padding: 44px 24px; }
+  .card-date { font-size: 11px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+}
+</style>
 </head>
 <body>
-    <nav>
-        <div class="container">
-            <a href="#" class="logo">anjali</a>
-            <div class="nav-right">
-                <ul class="nav-links">
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#experience">Experience</a></li>
-                    <li><a href="#projects">Projects</a></li>
-                    <li><a href="#skills">Skills</a></li>
-                    <li><a href="#achievements">Achievements</a></li>
-                </ul>
-                <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
-                    <span class="theme-icon"></span>
-                </button>
-                <button class="mobile-toggle" onclick="document.querySelector('.mobile-menu').classList.toggle('active')">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
-            </div>
-        </div>
-    </nav>
 
-    <div class="mobile-menu">
-        <a href="#about" onclick="document.querySelector('.mobile-menu').classList.remove('active')">About</a>
-        <a href="#experience" onclick="document.querySelector('.mobile-menu').classList.remove('active')">Experience</a>
-        <a href="#projects" onclick="document.querySelector('.mobile-menu').classList.remove('active')">Projects</a>
-        <a href="#skills" onclick="document.querySelector('.mobile-menu').classList.remove('active')">Skills</a>
-        <a href="#achievements" onclick="document.querySelector('.mobile-menu').classList.remove('active')">Achievements</a>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- Lucide icon sprite -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-mail" viewBox="0 0 24 24"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></symbol>
+  <symbol id="i-github" viewBox="0 0 24 24"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.4 5.4 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></symbol>
+  <symbol id="i-linkedin" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></symbol>
+  <symbol id="i-file-text" viewBox="0 0 24 24"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></symbol>
+  <symbol id="i-map-pin" viewBox="0 0 24 24"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></symbol>
+  <symbol id="i-briefcase" viewBox="0 0 24 24"><path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><rect width="20" height="14" x="2" y="6" rx="2"/></symbol>
+  <symbol id="i-folder" viewBox="0 0 24 24"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></symbol>
+  <symbol id="i-trophy" viewBox="0 0 24 24"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></symbol>
+  <symbol id="i-cap" viewBox="0 0 24 24"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/><path d="M22 10v6"/><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/></symbol>
+  <symbol id="i-code" viewBox="0 0 24 24"><path d="m18 16 4-4-4-4"/><path d="m6 8-4 4 4 4"/><path d="m14.5 4-5 16"/></symbol>
+  <symbol id="i-layers" viewBox="0 0 24 24"><path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/></symbol>
+  <symbol id="i-database" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5V19A9 3 0 0 0 21 19V5"/><path d="M3 12A9 3 0 0 0 21 12"/></symbol>
+  <symbol id="i-cloud" viewBox="0 0 24 24"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/></symbol>
+  <symbol id="i-arrow-ur" viewBox="0 0 24 24"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></symbol>
+  <symbol id="i-external" viewBox="0 0 24 24"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></symbol>
+  <symbol id="i-git-branch" viewBox="0 0 24 24"><line x1="6" x2="6" y1="3" y2="15"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M18 9a9 9 0 0 1-9 9"/></symbol>
+  <symbol id="i-terminal" viewBox="0 0 24 24"><path d="m4 17 6-6-6-6"/><path d="M12 19h8"/></symbol>
+</svg>
+
+<header>
+  <nav class="container nav" aria-label="Main">
+    <a href="#main" class="nav-brand">Anjali</a>
+    <div class="nav-links">
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#achievements">Achievements</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="nav-actions">
+      <button class="btn btn-ghost btn-icon" onclick="toggleTheme()" aria-label="Toggle colour theme" id="theme-btn">
+        <svg class="icon" aria-hidden="true"><use href="#i-moon"/></svg>
+      </button>
+      <a class="btn btn-primary" href="https://drive.google.com/drive/folders/1zzXInN3SRGEbT1IoyckaZYlbGkk4v5KS" target="_blank" rel="noopener">
+        <svg class="icon icon-sm" aria-hidden="true"><use href="#i-file-text"/></svg>Resume
+      </a>
+    </div>
+  </nav>
+</header>
+
+<main id="main">
+
+  <section class="hero container" aria-labelledby="hero-h">
+    <div class="badge-status"><span class="dot"></span> Open to software engineering roles</div>
+    <h1 id="hero-h">Anjali</h1>
+    <p class="hero-role">Software Engineer &middot; QA Intern at Scaler AI Labs</p>
+    <p class="hero-bio">
+      Information Science &amp; Engineering student building full-stack products end to end &mdash;
+      React and Next.js on the front, Node.js and Spring Boot behind it, deployed on AWS.
+      Open-source contributor and competitive programmer.
+    </p>
+    <div class="hero-meta">
+      <span><svg class="icon icon-sm" aria-hidden="true"><use href="#i-map-pin"/></svg>Bengaluru, India</span>
+      <span><svg class="icon icon-sm" aria-hidden="true"><use href="#i-cap"/></svg>B.E. ISE &middot; 2027</span>
+      <span><svg class="icon icon-sm" aria-hidden="true"><use href="#i-terminal"/></svg>CodeChef 1624 &middot; Codeforces 458</span>
+    </div>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="https://drive.google.com/drive/folders/1zzXInN3SRGEbT1IoyckaZYlbGkk4v5KS" target="_blank" rel="noopener">
+        <svg class="icon icon-sm" aria-hidden="true"><use href="#i-file-text"/></svg>View resume
+      </a>
+      <a class="btn btn-outline" href="mailto:iamanjali1003@gmail.com">
+        <svg class="icon icon-sm" aria-hidden="true"><use href="#i-mail"/></svg>Email
+      </a>
+      <a class="btn btn-outline" href="https://github.com/iamanjali1003" target="_blank" rel="noopener">
+        <svg class="icon icon-sm" aria-hidden="true"><use href="#i-github"/></svg>GitHub
+      </a>
+      <a class="btn btn-outline" href="https://linkedin.com/in/iamanjali1003" target="_blank" rel="noopener">
+        <svg class="icon icon-sm" aria-hidden="true"><use href="#i-linkedin"/></svg>LinkedIn
+      </a>
+    </div>
+  </section>
+
+  <section id="experience" class="container" aria-labelledby="exp-h">
+    <div class="section-head">
+      <svg class="icon" aria-hidden="true"><use href="#i-briefcase"/></svg>
+      <h2 id="exp-h">Experience</h2>
     </div>
 
-    <div class="container">
-        <section class="hero">
-            <div class="status-badge"><span class="dot"></span> Open to opportunities</div>
-            <h1>Hey, I'm <span class="accent">Anjali</span></h1>
-            <p class="subtitle">Software Engineering student building scalable backend systems and full-stack web applications. Open-source contributor. Competitive programmer.</p>
-            <div class="links">
-                <a href="mailto:iamanjali1003@gmail.com" class="primary">Get in touch</a>
-                <a href="https://github.com/iamanjali1003" target="_blank">GitHub</a>
-                <a href="https://linkedin.com/in/iamanjali1003" target="_blank">LinkedIn</a>
-                <a href="https://leetcode.com/u/iamanjali1003" target="_blank">LeetCode</a>
-                <a href="https://drive.google.com/drive/folders/1zzXInN3SRGEbT1IoyckaZYlbGkk4v5KS" target="_blank">Resume</a>
-            </div>
-            <div class="ratings">
-                <a href="https://www.codechef.com/users/iamanjali1003" target="_blank">CodeChef 1624</a>
-                <a href="https://codeforces.com/profile/iamanjali1003" target="_blank">Codeforces 458</a>
-            </div>
-        </section>
+    <article class="card">
+      <div class="card-head">
+        <h3 class="card-title">QA Intern <span class="badge badge-solid">Current</span></h3>
+        <span class="card-date">Sep 2026 &mdash; Present</span>
+      </div>
+      <p class="card-sub">Scaler AI Labs &middot; Bengaluru, Karnataka</p>
+      <ul class="bullets">
+        <li>Full-time, on-site quality assurance internship. Recently started &mdash; project highlights to follow.</li>
+      </ul>
+    </article>
 
-        <hr class="divider">
+    <article class="card">
+      <div class="card-head">
+        <h3 class="card-title">Software Engineering Job Simulation</h3>
+        <span class="card-date">Jan 2026</span>
+      </div>
+      <p class="card-sub">JPMorgan Chase &amp; Co. (Forage) &middot; Remote</p>
+      <ul class="bullets">
+        <li>Architected the <a href="https://github.com/iamanjali1003/forage-midas" target="_blank" rel="noopener"><strong>Midas</strong></a> transaction pipeline, integrating <strong>3 subsystems</strong> &mdash; Kafka messaging, H2 persistence and a REST Incentive API &mdash; into one <strong>Spring Boot</strong> microservice</li>
+        <li>Engineered Kafka consumers to ingest and deserialize transaction messages, validating data integrity across <a href="https://github.com/iamanjali1003/forage-jpmc-virtual-experience" target="_blank" rel="noopener"><strong>5 task modules</strong></a> with an embedded Kafka test framework</li>
+        <li>Modeled transaction persistence in <strong>Spring Data JPA</strong>, mapping entities and relations to track balance updates across User records</li>
+      </ul>
+      <p style="margin-top:14px">
+        <a class="link-out" href="https://drive.google.com/file/d/1I1JZLDGKprwv0Qwg48M_Yq4-xte1_kWC/view" target="_blank" rel="noopener">
+          Certificate <svg class="icon icon-sm" aria-hidden="true"><use href="#i-external"/></svg>
+        </a>
+      </p>
+    </article>
+  </section>
 
-        <section id="about">
-            <p class="section-label">About</p>
-            <p class="about-text">B.E. in <strong>Information Science & Engineering</strong> at JSS Academy of Technical Education, Bengaluru. I focus on <strong>backend engineering</strong> with Java and Spring Boot, and build <strong>full-stack applications</strong> with Next.js and TypeScript. Currently a <strong>QA Intern at Scaler AI Labs</strong> in Bengaluru. I contribute to open source through Hacktoberfest and solve algorithmic problems on CodeChef and Codeforces.</p>
-        </section>
-
-        <hr class="divider">
-
-        <section id="experience">
-            <p class="section-label">Experience</p>
-            <div class="experience-card" style="margin-bottom: 16px;">
-                <div class="experience-header">
-                    <h3>QA Intern <span class="badge-current">Current</span></h3>
-                    <span class="date">Sep 2026 &mdash; Present</span>
-                </div>
-                <p class="experience-company">Scaler AI Labs &middot; Bengaluru, Karnataka</p>
-                <ul class="experience-list">
-                    <li>Full-time, on-site quality assurance internship at Scaler AI Labs. Recently started &mdash; project highlights to follow.</li>
-                </ul>
-            </div>
-            <div class="experience-card">
-                <div class="experience-header">
-                    <h3><a href="https://drive.google.com/file/d/1I1JZLDGKprwv0Qwg48M_Yq4-xte1_kWC/view" target="_blank">Software Engineering Job Simulation</a></h3>
-                    <span class="date">Jan 2026</span>
-                </div>
-                <p class="experience-company">JPMorgan Chase & Co. (Forage) &middot; Remote</p>
-                <ul class="experience-list">
-                    <li>Architected the <a href="https://github.com/iamanjali1003/forage-midas" target="_blank"><strong>Midas</strong></a> transaction-processing pipeline by integrating <strong>3 subsystems</strong> &mdash; Kafka messaging, H2 SQL persistence, and a REST Incentive API &mdash; into a unified Spring Boot microservice</li>
-                    <li>Engineered Kafka consumer logic to ingest and deserialize high-volume transaction messages, validating data integrity across <a href="https://github.com/iamanjali1003/forage-jpmc-virtual-experience" target="_blank"><strong>5 task modules</strong></a> using an embedded Kafka test framework</li>
-                    <li>Implemented transaction persistence with Spring Data JPA, designing entity models and relational mappings to track balance updates across User records in an H2 database</li>
-                    <li>Developed and tested a REST controller endpoint for querying user balances, achieving <strong>full test coverage</strong> via Maven test suites and debugger-driven inspection</li>
-                </ul>
-            </div>
-        </section>
-
-        <hr class="divider">
-
-        <section id="projects">
-            <p class="section-label">Projects</p>
-            <div class="projects-grid">
-                <div class="project-card">
-                    <div class="project-header">
-                        <h3><a href="https://github.com/iamanjali1003/pixstory" target="_blank">pixStory</a><a class="project-live" href="http://Pixstory-env-1.eba-55bqi3ks.ap-south-1.elasticbeanstalk.com" target="_blank">Live</a></h3>
-                        <span class="arrow">&nearr;</span>
-                    </div>
-                    <p class="project-tech">React &middot; TypeScript &middot; Node.js &middot; Express &middot; MongoDB &middot; AWS</p>
-                    <ul class="project-list">
-                        <li>Built and <strong>deployed</strong> a full-stack photo gallery (<strong>React</strong>, <strong>Node.js</strong>/<strong>Express</strong>, <strong>MongoDB Atlas</strong>) to <strong>AWS Elastic Beanstalk</strong>, serving the SPA and REST API from a single origin</li>
-                        <li>Designed direct-to-<strong>S3</strong> uploads with <strong>presigned URLs</strong> so image bytes bypass the server, delivered over a <strong>CloudFront</strong> CDN fronting a private bucket locked by Origin Access Control</li>
-                        <li>Implemented <strong>JWT</strong> auth with bcrypt, full-text search on MongoDB text indexes, and like/comment flows with optimistic updates via <strong>TanStack Query</strong></li>
-                    </ul>
-                </div>
-                <div class="project-card">
-                    <div class="project-header">
-                        <h3><a href="https://github.com/iamanjali1003/monocv" target="_blank">monoCV</a></h3>
-                        <span class="arrow">&nearr;</span>
-                    </div>
-                    <p class="project-tech">Next.js &middot; TypeScript &middot; Tailwind CSS &middot; shadcn/ui &middot; Zustand &middot; Zod</p>
-                    <ul class="project-list">
-                        <li>Engineered a full-stack resume builder web application with real-time preview, enabling users to create ATS-friendly resumes through an intuitive form interface</li>
-                        <li>Implemented PDF export pipeline using @react-pdf/renderer, generating professionally formatted resumes with consistent styling and layout</li>
-                        <li>Designed a modular template architecture for easy expansion, with LocalStorage persistence for data retention and Zod schema validation ensuring type-safe form inputs</li>
-                    </ul>
-                </div>
-                <div class="project-card">
-                    <div class="project-header">
-                        <h3><a href="https://github.com/iamanjali1003/student-attendance-management-system" target="_blank">Student Attendance Management System</a></h3>
-                        <span class="arrow">&nearr;</span>
-                    </div>
-                    <p class="project-tech">MySQL 8.0 &middot; SQL &middot; Stored Procedures &middot; Triggers</p>
-                    <ul class="project-list">
-                        <li>Designed a normalized (3NF) relational database with <strong>7 tables</strong> to track attendance across multiple departments, courses, and <strong>200+ student records</strong></li>
-                        <li>Built <strong>5 stored procedures</strong> for bulk operations &mdash; automated absent marking, attendance percentage calculation, and low-attendance alerts</li>
-                        <li>Implemented audit trail with <strong>3 triggers</strong> for automatic change logging and data validation, ensuring complete traceability of attendance modifications</li>
-                        <li>Optimized query performance with composite indexes, supporting complex JOIN operations and aggregation queries across the full schema</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <hr class="divider">
-
-        <section id="skills">
-            <p class="section-label">Technical Skills</p>
-            <div class="skills-grid">
-                <div class="skill-category">
-                    <h3>Languages</h3>
-                    <div class="skill-tags">
-                        <span>Java</span>
-                        <span>TypeScript</span>
-                        <span>JavaScript</span>
-                        <span>SQL</span>
-                        <span>Python</span>
-                        <span>HTML/CSS</span>
-                    </div>
-                </div>
-                <div class="skill-category">
-                    <h3>Frameworks</h3>
-                    <div class="skill-tags">
-                        <span>React</span>
-                        <span>Next.js</span>
-                        <span>Node.js</span>
-                        <span>Express.js</span>
-                        <span>Spring Boot</span>
-                        <span>Tailwind CSS</span>
-                        <span>shadcn/ui</span>
-                        <span>React Hook Form</span>
-                    </div>
-                </div>
-                <div class="skill-category">
-                    <h3>Backend & Databases</h3>
-                    <div class="skill-tags">
-                        <span>MongoDB</span>
-                        <span>Mongoose</span>
-                        <span>MySQL</span>
-                        <span>PostgreSQL</span>
-                        <span>Apache Kafka</span>
-                        <span>Spring Data JPA</span>
-                        <span>REST APIs</span>
-                        <span>H2</span>
-                    </div>
-                </div>
-                <div class="skill-category">
-                    <h3>Cloud &amp; Tools</h3>
-                    <div class="skill-tags">
-                        <span>AWS S3</span>
-                        <span>CloudFront</span>
-                        <span>Elastic Beanstalk</span>
-                        <span>EC2</span>
-                        <span>Docker</span>
-                        <span>Git</span>
-                        <span>Maven</span>
-                        <span>TanStack Query</span>
-                        <span>Zustand</span>
-                        <span>Zod</span>
-                        <span>JWT</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <hr class="divider">
-
-        <section id="achievements">
-            <p class="section-label">Achievements</p>
-            <div class="achievements-list">
-                <div class="achievement-card opensource">
-                    <div class="achievement-header">
-                        <h3>Open-Source Contributor</h3>
-                        <span class="date">2024 &mdash; 2025</span>
-                    </div>
-                    <p>Completed <a href="https://drive.google.com/file/d/1llP7FIIgWXAP9vZ8Gf6RpLwLQ3OJ6Abw/view" target="_blank">Hacktoberfest 2024</a> (<strong>4+ merged PRs</strong>) and <a href="https://drive.google.com/file/d/1Zkq-ao_LBuOOWMgntiWhTtKd3YttMJng/view" target="_blank">Hacktoberfest 2025</a> (<strong>6+ merged PRs</strong>) across community-maintained repositories</p>
-                </div>
-                <div class="achievement-card cp">
-                    <div class="achievement-header">
-                        <h3>Competitive Programming</h3>
-                        <span class="date">2024 &mdash; Present</span>
-                    </div>
-                    <div class="rank-badges">
-                        <a class="rank-badge" href="https://www.codechef.com/rankings/START197D?itemsPerPage=100&order=asc&page=1&search=iamanjali1003&sortBy=rank" target="_blank">Rank 90 &middot; START197D</a>
-                        <a class="rank-badge" href="https://www.codechef.com/rankings/START199C?itemsPerPage=100&order=asc&page=1&search=iamanjali1003&sortBy=rank" target="_blank">Rank 201 &middot; START199C</a>
-                        <a class="rank-badge" href="https://www.codechef.com/rankings/START197D?itemsPerPage=100&order=asc&page=1&search=iamanjali1003&sortBy=rank" target="_blank">Rank 346 &middot; START197D</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <hr class="divider">
-
-        <section id="education">
-            <p class="section-label">Education</p>
-            <div class="education-card">
-                <h3>JSS Academy of Technical Education</h3>
-                <p class="degree">Bachelor of Engineering in Information Science & Engineering</p>
-                <p class="period">Aug 2023 &mdash; Aug 2027 &middot; Bengaluru, Karnataka</p>
-                <p class="coursework"><strong>Relevant Coursework:</strong> Data Structures & Algorithms, DBMS, OOP, Operating Systems, Computer Networks, Software Engineering</p>
-            </div>
-        </section>
+  <section id="projects" class="container" aria-labelledby="proj-h">
+    <div class="section-head">
+      <svg class="icon" aria-hidden="true"><use href="#i-folder"/></svg>
+      <h2 id="proj-h">Projects</h2>
     </div>
 
-    <footer>
-        <div class="container">
-            <div class="footer-links">
-                <a href="mailto:iamanjali1003@gmail.com">Email</a>
-                <a href="https://github.com/iamanjali1003" target="_blank">GitHub</a>
-                <a href="https://linkedin.com/in/iamanjali1003" target="_blank">LinkedIn</a>
-                <a href="https://leetcode.com/u/iamanjali1003" target="_blank">LeetCode</a>
-                <a href="https://www.codechef.com/users/iamanjali1003" target="_blank">CodeChef</a>
-                <a href="https://codeforces.com/profile/iamanjali1003" target="_blank">Codeforces</a>
-            </div>
-            <p>Anjali &copy; 2026</p>
-        </div>
-    </footer>
+    <article class="card">
+      <div class="card-head">
+        <h3 class="card-title">
+          <a href="https://github.com/iamanjali1003/pixstory" target="_blank" rel="noopener">pixStory</a>
+          <span class="badge">Live</span>
+        </h3>
+        <a class="link-out" href="http://Pixstory-env-1.eba-55bqi3ks.ap-south-1.elasticbeanstalk.com" target="_blank" rel="noopener">
+          Visit <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow-ur"/></svg>
+        </a>
+      </div>
+      <p class="tech">React &middot; TypeScript &middot; Node.js &middot; Express &middot; MongoDB &middot; AWS</p>
+      <ul class="bullets">
+        <li>Built and <strong>deployed</strong> a full-stack photo gallery (<strong>React</strong>, <strong>Node.js</strong>/<strong>Express</strong>, <strong>MongoDB Atlas</strong>) to <strong>AWS Elastic Beanstalk</strong>, serving the SPA and REST API from a single origin</li>
+        <li>Designed direct-to-<strong>S3</strong> uploads with <strong>presigned URLs</strong> so image bytes bypass the server, delivered over a <strong>CloudFront</strong> CDN fronting a private bucket locked by Origin Access Control</li>
+        <li>Implemented <strong>JWT</strong> auth with bcrypt, full-text search on MongoDB text indexes, and like/comment flows with optimistic updates via <strong>TanStack Query</strong></li>
+      </ul>
+    </article>
 
-    <script>
-        function toggleTheme() {
-            const html = document.documentElement;
-            const current = html.getAttribute('data-theme');
-            const next = current === 'dark' ? 'light' : 'dark';
-            html.setAttribute('data-theme', next);
-            localStorage.setItem('theme', next);
-            updateIcon(next);
+    <article class="card">
+      <div class="card-head">
+        <h3 class="card-title"><a href="https://github.com/iamanjali1003/monocv" target="_blank" rel="noopener">monoCV</a></h3>
+        <a class="link-out" href="https://github.com/iamanjali1003/monocv" target="_blank" rel="noopener">
+          Source <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow-ur"/></svg>
+        </a>
+      </div>
+      <p class="tech">Next.js &middot; TypeScript &middot; Tailwind CSS &middot; shadcn/ui &middot; Zustand &middot; Zod</p>
+      <ul class="bullets">
+        <li>Engineered a <strong>resume builder</strong> with live preview, letting users compose <strong>ATS-friendly</strong> resumes from a guided form</li>
+        <li>Built a <strong>PDF export</strong> pipeline on <strong>react-pdf</strong> over a modular template system designed for easy expansion</li>
+        <li>Enforced type-safe input with <strong>Zod</strong> and <strong>React Hook Form</strong>, persisting <strong>Zustand</strong> state to LocalStorage so drafts survive reloads</li>
+      </ul>
+    </article>
+
+    <article class="card">
+      <div class="card-head">
+        <h3 class="card-title"><a href="https://github.com/iamanjali1003/student-attendance-management-system" target="_blank" rel="noopener">Student Attendance Management System</a></h3>
+        <a class="link-out" href="https://github.com/iamanjali1003/student-attendance-management-system" target="_blank" rel="noopener">
+          Source <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow-ur"/></svg>
+        </a>
+      </div>
+      <p class="tech">MySQL 8.0 &middot; SQL &middot; Stored Procedures &middot; Triggers</p>
+      <ul class="bullets">
+        <li>Designed a normalized (<strong>3NF</strong>) schema of <strong>7 tables</strong> spanning departments, courses and <strong>200+ student records</strong></li>
+        <li>Automated reporting with <strong>5 stored procedures</strong> and <strong>3 audit triggers</strong>, adding composite indexes to speed up JOIN-heavy queries</li>
+      </ul>
+    </article>
+  </section>
+
+  <section id="skills" class="container" aria-labelledby="skills-h">
+    <div class="section-head">
+      <svg class="icon" aria-hidden="true"><use href="#i-code"/></svg>
+      <h2 id="skills-h">Technical Skills</h2>
+    </div>
+
+    <div class="skill-group">
+      <h3><svg class="icon icon-sm" aria-hidden="true"><use href="#i-terminal"/></svg>Languages</h3>
+      <div class="tags"><span>Java</span><span>TypeScript</span><span>JavaScript</span><span>Python</span><span>SQL</span><span>HTML/CSS</span></div>
+    </div>
+
+    <div class="skill-group">
+      <h3><svg class="icon icon-sm" aria-hidden="true"><use href="#i-layers"/></svg>Frameworks &amp; Libraries</h3>
+      <div class="tags"><span>React</span><span>Next.js</span><span>Node.js</span><span>Express.js</span><span>Spring Boot</span><span>Tailwind CSS</span><span>shadcn/ui</span><span>TanStack Query</span><span>Zustand</span><span>Zod</span><span>React Hook Form</span></div>
+    </div>
+
+    <div class="skill-group">
+      <h3><svg class="icon icon-sm" aria-hidden="true"><use href="#i-database"/></svg>Databases &amp; Messaging</h3>
+      <div class="tags"><span>MongoDB</span><span>Mongoose</span><span>MySQL</span><span>PostgreSQL</span><span>H2</span><span>Spring Data JPA</span><span>Apache Kafka</span><span>REST APIs</span></div>
+    </div>
+
+    <div class="skill-group">
+      <h3><svg class="icon icon-sm" aria-hidden="true"><use href="#i-cloud"/></svg>Cloud &amp; Tools</h3>
+      <div class="tags"><span>AWS S3</span><span>CloudFront</span><span>Elastic Beanstalk</span><span>EC2</span><span>IAM</span><span>Docker</span><span>Git</span><span>Maven</span><span>JWT</span></div>
+    </div>
+  </section>
+
+  <section id="achievements" class="container" aria-labelledby="ach-h">
+    <div class="section-head">
+      <svg class="icon" aria-hidden="true"><use href="#i-trophy"/></svg>
+      <h2 id="ach-h">Achievements</h2>
+    </div>
+
+    <article class="card">
+      <div class="card-head">
+        <h3 class="card-title"><svg class="icon icon-sm" aria-hidden="true"><use href="#i-git-branch"/></svg>Open-Source Contributor</h3>
+        <span class="card-date">2024 &mdash; 2025</span>
+      </div>
+      <ul class="bullets">
+        <li><a href="https://drive.google.com/file/d/1llP7FIIgWXAP9vZ8Gf6RpLwLQ3OJ6Abw/view" target="_blank" rel="noopener">Hacktoberfest 2024</a> (<strong>4+ merged PRs</strong>) and <a href="https://drive.google.com/file/d/1Zkq-ao_LBuOOWMgntiWhTtKd3YttMJng/view" target="_blank" rel="noopener">Hacktoberfest 2025</a> (<strong>6+ merged PRs</strong>) across community-maintained repositories</li>
+      </ul>
+    </article>
+
+    <article class="card">
+      <div class="card-head">
+        <h3 class="card-title"><svg class="icon icon-sm" aria-hidden="true"><use href="#i-trophy"/></svg>Competitive Programming</h3>
+        <span class="card-date">2024 &mdash; Present</span>
+      </div>
+      <ul class="bullets">
+        <li>CodeChef Starters &mdash; <a href="https://www.codechef.com/rankings/START197D?itemsPerPage=100&amp;order=asc&amp;page=1&amp;search=iamanjali1003&amp;sortBy=rank" target="_blank" rel="noopener"><strong>Global Rank 90</strong></a> and <a href="https://www.codechef.com/rankings/START197D?itemsPerPage=100&amp;order=asc&amp;page=1&amp;search=iamanjali1003&amp;sortBy=rank" target="_blank" rel="noopener"><strong>Rank 346</strong></a> (START197D), <a href="https://www.codechef.com/rankings/START199C?itemsPerPage=100&amp;order=asc&amp;page=1&amp;search=iamanjali1003&amp;sortBy=rank" target="_blank" rel="noopener"><strong>Rank 201</strong></a> (START199C)</li>
+        <li>Ratings: <strong>CodeChef 1624</strong> &middot; <strong>Codeforces 458</strong> &middot; active on <a href="https://leetcode.com/u/iamanjali1003" target="_blank" rel="noopener">LeetCode</a></li>
+      </ul>
+    </article>
+  </section>
+
+  <section id="education" class="container" aria-labelledby="edu-h">
+    <div class="section-head">
+      <svg class="icon" aria-hidden="true"><use href="#i-cap"/></svg>
+      <h2 id="edu-h">Education</h2>
+    </div>
+    <article class="card">
+      <div class="card-head">
+        <h3 class="card-title">JSS Academy of Technical Education</h3>
+        <span class="card-date">Aug 2023 &mdash; Aug 2027</span>
+      </div>
+      <p class="card-sub">Bachelor of Engineering, Information Science &amp; Engineering &middot; Bengaluru, Karnataka</p>
+      <ul class="bullets">
+        <li><strong>Relevant coursework:</strong> Data Structures &amp; Algorithms, DBMS, Object-Oriented Programming, Operating Systems, Computer Networks</li>
+      </ul>
+    </article>
+  </section>
+
+  <section id="contact" class="container" aria-labelledby="contact-h">
+    <div class="section-head">
+      <svg class="icon" aria-hidden="true"><use href="#i-user"/></svg>
+      <h2 id="contact-h">Contact</h2>
+    </div>
+    <p class="hero-bio" style="margin-bottom:18px">
+      Open to software engineering internships and new-grad roles. The fastest way to reach me is email &mdash; I reply to everything.
+    </p>
+    <div class="contact-grid">
+      <a class="btn btn-primary" href="mailto:iamanjali1003@gmail.com">
+        <svg class="icon icon-sm" aria-hidden="true"><use href="#i-mail"/></svg>iamanjali1003@gmail.com
+      </a>
+      <a class="btn btn-outline" href="https://drive.google.com/drive/folders/1zzXInN3SRGEbT1IoyckaZYlbGkk4v5KS" target="_blank" rel="noopener">
+        <svg class="icon icon-sm" aria-hidden="true"><use href="#i-file-text"/></svg>Resume
+      </a>
+      <a class="btn btn-outline" href="https://linkedin.com/in/iamanjali1003" target="_blank" rel="noopener">
+        <svg class="icon icon-sm" aria-hidden="true"><use href="#i-linkedin"/></svg>LinkedIn
+      </a>
+      <a class="btn btn-outline" href="https://github.com/iamanjali1003" target="_blank" rel="noopener">
+        <svg class="icon icon-sm" aria-hidden="true"><use href="#i-github"/></svg>GitHub
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container footer-inner">
+    <div class="footer-links">
+      <a href="mailto:iamanjali1003@gmail.com">Email</a>
+      <a href="https://github.com/iamanjali1003" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://linkedin.com/in/iamanjali1003" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://leetcode.com/u/iamanjali1003" target="_blank" rel="noopener">LeetCode</a>
+      <a href="https://www.codechef.com/users/iamanjali1003" target="_blank" rel="noopener">CodeChef</a>
+      <a href="https://codeforces.com/profile/iamanjali1003" target="_blank" rel="noopener">Codeforces</a>
+    </div>
+    <p class="footer-note">&copy; <span id="year">2026</span> Anjali</p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var root = document.documentElement;
+
+  function setIcon(theme) {
+    var use = document.querySelector('#theme-btn use');
+    if (use) use.setAttribute('href', theme === 'dark' ? '#i-sun' : '#i-moon');
+  }
+
+  var stored = null;
+  try { stored = localStorage.getItem('theme'); } catch (e) {}
+  var initial = stored || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+  root.setAttribute('data-theme', initial);
+  setIcon(initial);
+
+  window.toggleTheme = function () {
+    var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    setIcon(next);
+    try { localStorage.setItem('theme', next); } catch (e) {}
+  };
+
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  var links = Array.prototype.slice.call(document.querySelectorAll('.nav-links a'));
+  var map = {};
+  links.forEach(function (a) {
+    var el = document.querySelector(a.getAttribute('href'));
+    if (el) map[el.id] = a;
+  });
+  if ('IntersectionObserver' in window) {
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) {
+          links.forEach(function (l) { l.classList.remove('active'); });
+          if (map[en.target.id]) map[en.target.id].classList.add('active');
         }
-
-        function updateIcon(theme) {
-            document.querySelector('.theme-icon').textContent = theme === 'dark' ? '☀️' : '🌙';
-        }
-
-        const saved = localStorage.getItem('theme') || 'dark';
-        document.documentElement.setAttribute('data-theme', saved);
-        updateIcon(saved);
-    </script>
+      });
+    }, { rootMargin: '-64px 0px -70% 0px' });
+    Object.keys(map).forEach(function (id) { obs.observe(document.getElementById(id)); });
+  }
+})();
+</script>
 </body>
 </html>
