@@ -1,18 +1,19 @@
 import { ArrowUpRight } from "lucide-react"
 
+import { BulletList } from "@/components/shared/bullet-list"
 import { RichText } from "@/components/shared/rich-text"
 import { Badge } from "@/components/ui/badge"
-import { Card } from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
+import { Card, CardAction, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import type { Entry } from "@/content/types"
-import { cn } from "@/lib/utils"
 
 export function EntryCard({ entry }: { entry: Entry }) {
   const { title, href, suffix, badge, date, action, subtitle, tech, points } = entry
 
   return (
-    <Card className="p-5 transition-colors hover:border-muted-foreground/45 max-sm:p-4">
-      <div className="mb-0.5 flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
-        <h3 className="inline-flex flex-wrap items-center gap-2 text-[15px] font-semibold tracking-[-0.01em]">
+    <Card className="transition-colors hover:border-foreground/25">
+      <CardHeader>
+        <CardTitle className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[15px] leading-snug tracking-[-0.01em]">
           {href ? (
             <a href={href} target="_blank" rel="noopener noreferrer" className="underline-offset-4 hover:underline">
               {title}
@@ -20,44 +21,44 @@ export function EntryCard({ entry }: { entry: Entry }) {
           ) : (
             title
           )}
-          {suffix && <span>{suffix}</span>}
+          {suffix && <span className="font-normal text-muted-foreground">{suffix}</span>}
           {badge && <Badge variant={badge.solid ? "default" : "outline"}>{badge.label}</Badge>}
-        </h3>
+        </CardTitle>
+
+        {subtitle && (
+          <CardDescription className="text-[13px]">
+            <RichText text={subtitle} />
+          </CardDescription>
+        )}
+
         {date && (
-          <span className="whitespace-nowrap font-mono text-xs text-muted-foreground max-sm:text-[11px]">
-            {date}
-          </span>
+          <CardAction className="font-mono text-xs whitespace-nowrap text-muted-foreground">{date}</CardAction>
         )}
         {action && (
-          <a
-            href={action.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground"
-          >
-            {action.label}
-            <ArrowUpRight className="size-3.5" aria-hidden="true" />
-          </a>
+          <CardAction>
+            <Button variant="ghost" size="sm" asChild className="-mt-1.5 -mr-2 h-7 px-2 text-xs">
+              <a href={action.href} target="_blank" rel="noopener noreferrer">
+                {action.label}
+                <ArrowUpRight />
+              </a>
+            </Button>
+          </CardAction>
         )}
-      </div>
+      </CardHeader>
 
-      {subtitle && (
-        <p className="mb-3.5 text-[13px] text-muted-foreground">
-          <RichText text={subtitle} />
-        </p>
+      <CardContent>
+        <BulletList points={points} />
+      </CardContent>
+
+      {tech && (
+        <CardFooter className="flex-wrap gap-1.5">
+          {tech.map((item) => (
+            <Badge key={item} variant="outline" className="font-mono font-normal">
+              {item}
+            </Badge>
+          ))}
+        </CardFooter>
       )}
-      {tech && <p className="mb-3.5 font-mono text-xs text-muted-foreground">{tech.join(" · ")}</p>}
-
-      <ul className={cn("space-y-[7px]", !subtitle && !tech && "mt-2.5")}>
-        {points.map((point) => (
-          <li
-            key={point}
-            className="relative pl-[18px] text-sm leading-[1.65] text-muted-foreground before:absolute before:top-[9px] before:left-[3px] before:size-1 before:bg-muted-foreground/60 before:content-['']"
-          >
-            <RichText text={point} />
-          </li>
-        ))}
-      </ul>
     </Card>
   )
 }
