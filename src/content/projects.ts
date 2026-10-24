@@ -23,7 +23,7 @@ export const projects: Entry[] = [
     points: [
       "Built a **CLI** that validates CSV files against YAML rules and exits non-zero on failure, so it can gate a **CI** build",
       "Designed a plugin architecture on Java’s **ServiceLoader**: **5 validation rules** and **4 report formats** (text, JSON, HTML, LaTeX) are discovered at runtime, so adding one never touches the engine",
-      "Covered the parser, engine, rules and reporters with **31 JUnit 5 tests**, run on every push by **GitHub Actions**",
+      "Covered the parser, engine, rules and reporters with **35 JUnit 5 tests**, run on every push by **GitHub Actions**",
     ],
   },
   {
