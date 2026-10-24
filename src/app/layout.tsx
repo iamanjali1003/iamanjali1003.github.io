@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next"
 import { Inter, JetBrains_Mono } from "next/font/google"
 
 import { ThemeProvider } from "@/components/layout/theme-provider"
+import { TooltipProvider } from "@/components/ui/tooltip"
 import { profile } from "@/content/profile"
 
 import "./globals.css"
@@ -81,7 +82,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           >
             Skip to content
           </a>
-          {children}
+          <TooltipProvider delayDuration={300}>{children}</TooltipProvider>
         </ThemeProvider>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(person) }} />
       </body>
