@@ -1,6 +1,6 @@
 import { Code } from "lucide-react"
 
-import { Section } from "@/components/section"
+import { Section } from "@/components/sections/section"
 import { skills } from "@/content/skills"
 
 export function Skills() {

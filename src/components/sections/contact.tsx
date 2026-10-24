@@ -1,6 +1,6 @@
 import { FileText, Github, Linkedin, Mail, User } from "lucide-react"
 
-import { Section } from "@/components/section"
+import { Section } from "@/components/sections/section"
 import { Button } from "@/components/ui/button"
 import { profile } from "@/content/profile"
 

@@ -1,4 +1,4 @@
-import { Mark } from "@/components/mark"
+import { Mark } from "@/components/shared/mark"
 import { profile } from "@/content/profile"
 
 const LINKS = [

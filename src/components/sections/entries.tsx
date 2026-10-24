@@ -1,7 +1,7 @@
 import type { LucideIcon } from "lucide-react"
 
-import { EntryCard } from "@/components/entry-card"
-import { Section } from "@/components/section"
+import { EntryCard } from "@/components/shared/entry-card"
+import { Section } from "@/components/sections/section"
 import type { Entry } from "@/content/types"
 
 // Experience, projects, achievements and education all render the same way:

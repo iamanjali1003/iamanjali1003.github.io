@@ -1,42 +1,22 @@
 "use client"
 
 import { FileText } from "lucide-react"
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useRef } from "react"
 
-import { Mark } from "@/components/mark"
-import { ThemeToggle } from "@/components/theme-toggle"
+import { Mark } from "@/components/shared/mark"
+import { ThemeToggle } from "@/components/layout/theme-toggle"
 import { Button } from "@/components/ui/button"
+import { navigation } from "@/content/navigation"
 import { profile } from "@/content/profile"
+import { useActiveSection } from "@/hooks/use-active-section"
 import { cn } from "@/lib/utils"
 
-const NAV = [
-  { id: "experience", label: "Experience" },
-  { id: "projects", label: "Projects" },
-  { id: "skills", label: "Skills" },
-  { id: "achievements", label: "Achievements" },
-  { id: "contact", label: "Contact" },
-]
+
+const SECTION_IDS = navigation.map((item) => item.id)
 
 export function SiteHeader() {
-  const [active, setActive] = useState<string | null>(null)
+  const active = useActiveSection(SECTION_IDS)
   const strip = useRef<HTMLDivElement>(null)
-
-  // Highlight the section currently under the header.
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting) setActive(entry.target.id)
-        }
-      },
-      { rootMargin: "-64px 0px -70% 0px" }
-    )
-    for (const { id } of NAV) {
-      const section = document.getElementById(id)
-      if (section) observer.observe(section)
-    }
-    return () => observer.disconnect()
-  }, [])
 
   // On phones the links scroll sideways; keep the active one in view.
   useEffect(() => {
@@ -61,7 +41,7 @@ export function SiteHeader() {
           ref={strip}
           className="flex gap-1 [scrollbar-width:none] max-sm:order-3 max-sm:-mx-4 max-sm:w-[calc(100%+2rem)] max-sm:overflow-x-auto max-sm:px-1.5 max-sm:pb-2 [&::-webkit-scrollbar]:hidden"
         >
-          {NAV.map(({ id, label }) => (
+          {navigation.map(({ id, label }) => (
             <a
               key={id}
               href={`#${id}`}

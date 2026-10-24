@@ -1,6 +1,6 @@
 import { ArrowUpRight } from "lucide-react"
 
-import { RichText } from "@/components/rich-text"
+import { RichText } from "@/components/shared/rich-text"
 import { Badge } from "@/components/ui/badge"
 import { Card } from "@/components/ui/card"
 import type { Entry } from "@/content/types"
