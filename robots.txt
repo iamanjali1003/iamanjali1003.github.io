@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://iamanjali1003.github.io/sitemap.xml
