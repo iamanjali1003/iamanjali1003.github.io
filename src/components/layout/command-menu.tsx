@@ -84,9 +84,9 @@ export function CommandMenu() {
             size="sm"
             aria-label="Search"
             onClick={() => setOpen(true)}
-            className="h-9 gap-2 px-2.5 text-muted-foreground max-md:w-9 max-md:border-transparent max-md:px-0"
+            className="h-8 gap-1.5 px-2 text-muted-foreground max-md:w-8 max-md:border-transparent max-md:px-0"
           >
-            <Search className="size-4" />
+            <Search className="size-3.5" />
             <Kbd className="max-md:hidden">⌘K</Kbd>
           </Button>
         </TooltipTrigger>

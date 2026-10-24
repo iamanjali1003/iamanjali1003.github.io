@@ -17,18 +17,18 @@ export function SiteHeader() {
 
   return (
     <header className="sticky top-0 z-50 border-b bg-background/80 backdrop-blur-md backdrop-saturate-[1.8]">
-      <div className="mx-auto flex h-[60px] max-w-3xl items-center gap-4 px-6 max-sm:px-4">
-        <a href="#main" className="inline-flex shrink-0 items-center gap-2.5 text-[15px] font-semibold tracking-[-0.02em]">
-          <Mark />
+      <div className="mx-auto flex h-14 max-w-3xl items-center gap-4 px-6 max-sm:px-4">
+        <a href="#main" className="inline-flex shrink-0 items-center gap-2 text-sm font-semibold tracking-[-0.02em]">
+          <Mark className="size-5" />
           {profile.name}
         </a>
 
         <MainNav active={active} />
 
-        <div className="ml-auto flex items-center gap-1.5">
+        <div className="ml-auto flex items-center gap-1">
           <CommandMenu />
           <ThemeToggle />
-          <Button asChild className="max-sm:hidden">
+          <Button asChild size="sm" className="ml-1 max-sm:hidden">
             <a href={profile.links.resume} target="_blank" rel="noopener noreferrer">
               <FileText />
               Resume

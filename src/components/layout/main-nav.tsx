@@ -19,7 +19,7 @@ export function MainNav({ active }: { active: string | null }) {
               active={active === id}
               className={cn(
                 navigationMenuTriggerStyle(),
-                "h-8 bg-transparent px-2.5 text-[13px] font-normal text-muted-foreground data-[active]:font-medium data-[active]:text-foreground"
+                "h-7 bg-transparent px-2 text-[13px] font-normal text-muted-foreground data-[active]:font-medium data-[active]:text-foreground"
               )}
             >
               <a href={`#${id}`}>{label}</a>
