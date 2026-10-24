@@ -57,8 +57,7 @@
     "https://github.com/iamanjali1003",
     "https://linkedin.com/in/iamanjali1003",
     "https://leetcode.com/u/iamanjali1003",
-    "https://www.codechef.com/users/iamanjali1003",
-    "https://codeforces.com/profile/iamanjali1003"
+    "https://www.codechef.com/users/iamanjali1003"
   ]
 }
 </script>
@@ -353,7 +352,7 @@ footer { border-top: 1px solid hsl(var(--border)); padding: 28px 0 40px; }
     <div class="hero-meta">
       <span><svg class="icon icon-sm" aria-hidden="true"><use href="#i-map-pin"/></svg>Bengaluru, India</span>
       <span><svg class="icon icon-sm" aria-hidden="true"><use href="#i-cap"/></svg>B.E. ISE &middot; 2027</span>
-      <span><svg class="icon icon-sm" aria-hidden="true"><use href="#i-terminal"/></svg>CodeChef 1624 &middot; Codeforces 458</span>
+      <span><svg class="icon icon-sm" aria-hidden="true"><use href="#i-terminal"/></svg>CodeChef 3&#9733; &middot; max 1674</span>
     </div>
     <div class="hero-actions">
       <a class="btn btn-primary" href="https://drive.google.com/file/d/1KDk7v-9up1t4L8n-G9C0HnLWMaej5W5T/view" target="_blank" rel="noopener">
@@ -379,31 +378,15 @@ footer { border-top: 1px solid hsl(var(--border)); padding: 28px 0 40px; }
 
     <article class="card">
       <div class="card-head">
-        <h3 class="card-title">QA Intern <span class="badge badge-solid">Current</span></h3>
+        <h3 class="card-title">QA Intern &mdash; RL Environments <span class="badge badge-solid">Current</span></h3>
         <span class="card-date">Sep 2026 &mdash; Present</span>
       </div>
       <p class="card-sub">Scaler AI Labs &middot; Bengaluru, Karnataka</p>
       <ul class="bullets">
-        <li>Full-time, on-site quality assurance internship. Recently started &mdash; project highlights to follow.</li>
+        <li>Test <strong>reinforcement learning (RL) environments</strong>, sandboxed apps where AI agents learn by doing real tasks</li>
+        <li>Validate the <strong>automated graders</strong> that score each task, tracing wrong scores to a root cause with engineers</li>
+        <li>Clean and validate <strong>AI training data</strong>, finding inconsistent or invalid records and correcting them</li>
       </ul>
-    </article>
-
-    <article class="card">
-      <div class="card-head">
-        <h3 class="card-title">Software Engineering Job Simulation</h3>
-        <span class="card-date">Jan 2026</span>
-      </div>
-      <p class="card-sub">JPMorgan Chase &amp; Co. (Forage) &middot; Remote</p>
-      <ul class="bullets">
-        <li>Architected the <a href="https://github.com/iamanjali1003/forage-midas" target="_blank" rel="noopener"><strong>Midas</strong></a> transaction pipeline, integrating <strong>3 subsystems</strong> &mdash; Kafka messaging, H2 persistence and a REST Incentive API &mdash; into one <strong>Spring Boot</strong> microservice</li>
-        <li>Engineered Kafka consumers to ingest and deserialize transaction messages, validating data integrity across <a href="https://github.com/iamanjali1003/forage-jpmc-virtual-experience" target="_blank" rel="noopener"><strong>5 task modules</strong></a> with an embedded Kafka test framework</li>
-        <li>Modeled transaction persistence in <strong>Spring Data JPA</strong>, mapping entities and relations to track balance updates across User records</li>
-      </ul>
-      <p style="margin-top:14px">
-        <a class="link-out" href="https://drive.google.com/file/d/1I1JZLDGKprwv0Qwg48M_Yq4-xte1_kWC/view" target="_blank" rel="noopener">
-          Certificate <svg class="icon icon-sm" aria-hidden="true"><use href="#i-external"/></svg>
-        </a>
-      </p>
     </article>
   </section>
 
@@ -425,9 +408,24 @@ footer { border-top: 1px solid hsl(var(--border)); padding: 28px 0 40px; }
       </div>
       <p class="tech">React &middot; TypeScript &middot; Node.js &middot; Express &middot; MongoDB &middot; AWS</p>
       <ul class="bullets">
-        <li>Built and <strong>deployed</strong> a full-stack photo gallery (<strong>React</strong>, <strong>Node.js</strong>/<strong>Express</strong>, <strong>MongoDB Atlas</strong>) to <strong>AWS Elastic Beanstalk</strong>, serving the SPA and REST API from a single origin</li>
+        <li><strong>Deployed</strong> a photo gallery on <strong>AWS Elastic Beanstalk</strong>, serving the React app and REST API from one origin</li>
         <li>Designed direct-to-<strong>S3</strong> uploads with <strong>presigned URLs</strong> so image bytes bypass the server, delivered over a <strong>CloudFront</strong> CDN fronting a private bucket locked by Origin Access Control</li>
-        <li>Implemented <strong>JWT</strong> auth with bcrypt, full-text search on MongoDB text indexes, and like/comment flows with optimistic updates via <strong>TanStack Query</strong></li>
+        <li>Implemented <strong>JWT</strong> auth with bcrypt, full-text search on MongoDB text indexes, and likes/comments that patch the <strong>TanStack Query</strong> cache in place instead of refetching the feed</li>
+      </ul>
+    </article>
+
+    <article class="card">
+      <div class="card-head">
+        <h3 class="card-title"><a href="https://github.com/iamanjali1003/datacheck" target="_blank" rel="noopener">datacheck</a></h3>
+        <a class="link-out" href="https://github.com/iamanjali1003/datacheck" target="_blank" rel="noopener">
+          Source <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow-ur"/></svg>
+        </a>
+      </div>
+      <p class="tech">Java 21 &middot; Maven &middot; JUnit 5 &middot; GitHub Actions</p>
+      <ul class="bullets">
+        <li>Built a <strong>CLI</strong> that validates CSV files against YAML rules and exits non-zero on failure, so it can gate a <strong>CI</strong> build</li>
+        <li>Designed a plugin architecture on Java&rsquo;s <strong>ServiceLoader</strong>: <strong>5 validation rules</strong> and <strong>4 report formats</strong> (text, JSON, HTML, LaTeX) are discovered at runtime, so adding one never touches the engine</li>
+        <li>Covered the parser, engine, rules and reporters with <strong>31 JUnit 5 tests</strong>, run on every push by <strong>GitHub Actions</strong></li>
       </ul>
     </article>
 
@@ -440,9 +438,22 @@ footer { border-top: 1px solid hsl(var(--border)); padding: 28px 0 40px; }
       </div>
       <p class="tech">Next.js &middot; TypeScript &middot; Tailwind CSS &middot; shadcn/ui &middot; Zustand &middot; Zod</p>
       <ul class="bullets">
-        <li>Engineered a <strong>resume builder</strong> with live preview, letting users compose <strong>ATS-friendly</strong> resumes from a guided form</li>
-        <li>Built a <strong>PDF export</strong> pipeline on <strong>react-pdf</strong> over a modular template system designed for easy expansion</li>
-        <li>Enforced type-safe input with <strong>Zod</strong> and <strong>React Hook Form</strong>, persisting <strong>Zustand</strong> state to LocalStorage so drafts survive reloads</li>
+        <li>Built an <strong>ATS-friendly resume builder</strong> with live preview and <strong>PDF export</strong>, both rendered from one data model</li>
+        <li>Validated every form with <strong>Zod</strong> and React Hook Form; <strong>Zustand</strong> state persists to localStorage across reloads</li>
+      </ul>
+    </article>
+
+    <article class="card">
+      <div class="card-head">
+        <h3 class="card-title"><a href="https://github.com/iamanjali1003/forage-midas" target="_blank" rel="noopener">Midas</a><span>&mdash; JPMorgan Chase Software Engineering Simulation</span></h3>
+        <a class="link-out" href="https://drive.google.com/file/d/1I1JZLDGKprwv0Qwg48M_Yq4-xte1_kWC/view" target="_blank" rel="noopener">
+          Certificate <svg class="icon icon-sm" aria-hidden="true"><use href="#i-external"/></svg>
+        </a>
+      </div>
+      <p class="tech">Java &middot; Spring Boot &middot; Kafka &middot; JPA</p>
+      <ul class="bullets">
+        <li>Integrated <strong>Kafka</strong>, H2 persistence and a REST Incentive API into one <strong>Spring Boot</strong> service tracking user balances</li>
+        <li>Wrote Kafka consumers that deserialize and validate transactions, tested against <strong>embedded Kafka</strong></li>
       </ul>
     </article>
 
@@ -455,8 +466,8 @@ footer { border-top: 1px solid hsl(var(--border)); padding: 28px 0 40px; }
       </div>
       <p class="tech">MySQL 8.0 &middot; SQL &middot; Stored Procedures &middot; Triggers</p>
       <ul class="bullets">
-        <li>Designed a normalized (<strong>3NF</strong>) schema of <strong>7 tables</strong> spanning departments, courses and <strong>200+ student records</strong></li>
-        <li>Automated reporting with <strong>5 stored procedures</strong> and <strong>3 audit triggers</strong>, adding composite indexes to speed up JOIN-heavy queries</li>
+        <li>Designed a <strong>3NF</strong> schema of <strong>7 tables</strong>, with a composite unique key allowing one mark per student, course and date</li>
+        <li>Wrote <strong>6 stored procedures</strong> for reporting and bulk marking, and <strong>4 audit triggers</strong> that log every change</li>
       </ul>
     </article>
   </section>
@@ -484,7 +495,7 @@ footer { border-top: 1px solid hsl(var(--border)); padding: 28px 0 40px; }
 
     <div class="skill-group">
       <h3><svg class="icon icon-sm" aria-hidden="true"><use href="#i-cloud"/></svg>Cloud &amp; Tools</h3>
-      <div class="tags"><span>AWS S3</span><span>CloudFront</span><span>Elastic Beanstalk</span><span>EC2</span><span>IAM</span><span>Docker</span><span>Git</span><span>Maven</span><span>JWT</span></div>
+      <div class="tags"><span>AWS S3</span><span>CloudFront</span><span>Elastic Beanstalk</span><span>EC2</span><span>IAM</span><span>Docker</span><span>Git</span><span>Maven</span><span>JUnit 5</span><span>GitHub Actions</span><span>JWT</span></div>
     </div>
   </section>
 
@@ -510,8 +521,8 @@ footer { border-top: 1px solid hsl(var(--border)); padding: 28px 0 40px; }
         <span class="card-date">2024 &mdash; Present</span>
       </div>
       <ul class="bullets">
-        <li>CodeChef Starters &mdash; <a href="https://www.codechef.com/rankings/START197D?itemsPerPage=100&amp;order=asc&amp;page=1&amp;search=iamanjali1003&amp;sortBy=rank" target="_blank" rel="noopener"><strong>Global Rank 90</strong></a> and <a href="https://www.codechef.com/rankings/START197D?itemsPerPage=100&amp;order=asc&amp;page=1&amp;search=iamanjali1003&amp;sortBy=rank" target="_blank" rel="noopener"><strong>Rank 346</strong></a> (START197D), <a href="https://www.codechef.com/rankings/START199C?itemsPerPage=100&amp;order=asc&amp;page=1&amp;search=iamanjali1003&amp;sortBy=rank" target="_blank" rel="noopener"><strong>Rank 201</strong></a> (START199C)</li>
-        <li>Ratings: <strong>CodeChef 1624</strong> &middot; <strong>Codeforces 458</strong> &middot; active on <a href="https://leetcode.com/u/iamanjali1003" target="_blank" rel="noopener">LeetCode</a></li>
+        <li>CodeChef <strong>3&#9733;</strong>, max rating <strong>1674</strong> &mdash; <a href="https://www.codechef.com/rankings/START197D?itemsPerPage=100&amp;order=asc&amp;page=1&amp;search=iamanjali1003&amp;sortBy=rank" target="_blank" rel="noopener"><strong>Global Rank 90</strong></a> in Starters 197</li>
+        <li>Active on <a href="https://leetcode.com/u/iamanjali1003" target="_blank" rel="noopener">LeetCode</a></li>
       </ul>
     </article>
   </section>
@@ -567,7 +578,6 @@ footer { border-top: 1px solid hsl(var(--border)); padding: 28px 0 40px; }
       <a href="https://linkedin.com/in/iamanjali1003" target="_blank" rel="noopener">LinkedIn</a>
       <a href="https://leetcode.com/u/iamanjali1003" target="_blank" rel="noopener">LeetCode</a>
       <a href="https://www.codechef.com/users/iamanjali1003" target="_blank" rel="noopener">CodeChef</a>
-      <a href="https://codeforces.com/profile/iamanjali1003" target="_blank" rel="noopener">Codeforces</a>
     </div>
     <p class="footer-note">&copy; <span id="year">2026</span> Anjali</p>
   </div>
