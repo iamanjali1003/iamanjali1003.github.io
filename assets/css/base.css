@@ -26,7 +26,6 @@ img { max-width: 100%; display: block; }
 :focus-visible {
   outline: 2px solid hsl(var(--ring));
   outline-offset: 2px;
-  border-radius: calc(var(--radius) - 2px);
 }
 
 .skip-link {
@@ -41,7 +40,7 @@ img { max-width: 100%; display: block; }
 .icon {
   width: 16px; height: 16px; flex: none;
   stroke: currentColor; fill: none;
-  stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+  stroke-width: 2; stroke-linecap: square; stroke-linejoin: miter;
 }
 .icon-sm { width: 14px; height: 14px; }
 .icon-lg { width: 18px; height: 18px; }

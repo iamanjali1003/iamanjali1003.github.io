@@ -14,12 +14,12 @@ main > section.container:last-of-type { border-bottom: 0; }
 .hero.container { padding: 76px 24px 60px; border-bottom: 1px solid hsl(var(--border)); }
 .badge-status {
   display: inline-flex; align-items: center; gap: 7px;
-  border: 1px solid hsl(var(--border)); border-radius: 999px;
+  border: 1px solid hsl(var(--border)); border-radius: var(--radius);
   padding: 4px 11px; font-size: 12px; font-weight: 500;
   color: hsl(var(--muted-foreground)); margin-bottom: 22px;
 }
 .badge-status .dot {
-  width: 6px; height: 6px; border-radius: 50%;
+  width: 6px; height: 6px;
   background: hsl(var(--foreground)); animation: pulse 2.4s ease-in-out infinite;
 }
 @keyframes pulse { 0%, 100% { opacity: 1 } 50% { opacity: .35 } }
