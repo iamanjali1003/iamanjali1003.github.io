@@ -6,13 +6,12 @@ export const projects: Entry[] = [
   {
     title: "pixStory",
     href: github("pixstory"),
-    badge: { label: "Live" },
-    action: { label: "Visit", href: "http://Pixstory-env-1.eba-55bqi3ks.ap-south-1.elasticbeanstalk.com" },
+    action: { label: "Source", href: github("pixstory") },
     tech: ["React", "TypeScript", "Node.js", "Express", "MongoDB", "AWS"],
     points: [
       "**Deployed** a photo gallery on **AWS Elastic Beanstalk**, serving the React app and REST API from one origin",
       "Designed direct-to-**S3** uploads with **presigned URLs** so image bytes bypass the server, delivered over a **CloudFront** CDN fronting a private bucket locked by Origin Access Control",
-      "Implemented **JWT** auth with bcrypt, full-text search on MongoDB text indexes, and likes/comments that patch the **TanStack Query** cache in place instead of refetching the feed",
+      "Implemented **JWT** auth with bcrypt and full-text search on MongoDB text indexes, and made likes **atomic** ($addToSet/$pull) to remove a race between concurrent users",
     ],
   },
   {
@@ -33,7 +32,7 @@ export const projects: Entry[] = [
     tech: ["Next.js", "TypeScript", "Tailwind CSS", "shadcn/ui", "Zustand", "Zod"],
     points: [
       "Built an **ATS-friendly resume builder** with live preview and **PDF export**, both rendered from one data model",
-      "Validated every form with **Zod** and React Hook Form; **Zustand** state persists to localStorage across reloads",
+      "Fixed an autosave loop that rewrote state every **300 ms** by replacing five duplicated effects with **one hook**",
     ],
   },
   {
