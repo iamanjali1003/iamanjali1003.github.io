@@ -33,6 +33,7 @@ export const projects: Entry[] = [
     points: [
       "Built an **ATS-friendly resume builder** with live preview and **PDF export**, both rendered from one data model",
       "Fixed an autosave loop that rewrote state every **300 ms** by replacing five duplicated effects with **one hook**",
+      "Validated every form with **Zod** and React Hook Form; **Zustand** keeps drafts in localStorage across reloads",
     ],
   },
   {
@@ -44,6 +45,7 @@ export const projects: Entry[] = [
     points: [
       "Integrated **Kafka**, H2 persistence and a REST Incentive API into one **Spring Boot** service tracking user balances",
       "Wrote Kafka consumers that deserialize and validate transactions, tested against **embedded Kafka**",
+      "Built a **REST** endpoint, GET /balance, that returns a user's balance as JSON from the database",
     ],
   },
   {
@@ -54,6 +56,7 @@ export const projects: Entry[] = [
     points: [
       "Designed a **3NF** schema of **7 tables**, with a composite unique key allowing one mark per student, course and date",
       "Wrote **6 stored procedures** for reporting and bulk marking, and **4 audit triggers** that log every change",
+      "Enforced rules in the database itself, with a **BEFORE INSERT** trigger that rejects future-dated attendance",
     ],
   },
 ]
