@@ -3,9 +3,9 @@ import type { Entry } from "./types"
 export const achievements: Entry[] = [
   {
     title: "Open-Source Contributor",
-    date: "2024 — 2025",
+    date: "2024",
     points: [
-      "[Hacktoberfest 2024](https://drive.google.com/file/d/1llP7FIIgWXAP9vZ8Gf6RpLwLQ3OJ6Abw/view) (**4+ merged PRs**) and [Hacktoberfest 2025](https://drive.google.com/file/d/1Zkq-ao_LBuOOWMgntiWhTtKd3YttMJng/view) (**6+ merged PRs**) across community-maintained repositories",
+      "[Hacktoberfest 2024](https://drive.google.com/file/d/1llP7FIIgWXAP9vZ8Gf6RpLwLQ3OJ6Abw/view) PRs merged into [**stock-backend**](https://github.com/shivamsouravjha/stock-backend/pull/13) (structured logging with Uber's zap) and [**parquet-go**](https://github.com/parquet-go/parquet-go/pull/177) (docs)",
     ],
   },
   {
