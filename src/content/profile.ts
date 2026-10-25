@@ -1,13 +1,12 @@
 export const profile = {
   name: "Anjali",
   role: "Software Engineering Student",
-  status: "Open to internships & new-grad roles",
-  bio: "Information Science & Engineering student building full-stack products end to end — React and Next.js on the front, Node.js and Spring Boot behind it, deployed on AWS. Open-source contributor and competitive programmer.",
+  headline:
+    "I build full-stack software, from React and Next.js front ends to Java and Node.js services on AWS.",
+  about:
+    "Final-year Information Science & Engineering student at JSS Academy of Technical Education, Bengaluru, graduating in 2027. Open to SDE internships and new-grad roles.",
   description:
     "Software engineering student in Bengaluru. Full-stack products with React, Next.js, Node.js, Java and Spring Boot on AWS.",
-  location: "Bengaluru, India",
-  degree: "B.E. ISE · 2027",
-  rating: "CodeChef 3★ · max 1674",
   email: "iamanjali1003@gmail.com",
   url: "https://iamanjali1003.github.io",
   links: {
@@ -17,6 +16,5 @@ export const profile = {
     leetcode: "https://leetcode.com/u/iamanjali1003",
     codechef: "https://www.codechef.com/users/iamanjali1003",
   },
-  contact:
-    "Open to software engineering internships and new-grad roles. The fastest way to reach me is email — I reply to everything.",
+  contact: "Open to SDE internships and new-grad roles. Email is the fastest way to reach me.",
 }

@@ -1,5 +1,3 @@
-import { Briefcase, Folder, GraduationCap, Trophy } from "lucide-react"
-
 import { SiteFooter } from "@/components/layout/site-footer"
 import { SiteHeader } from "@/components/layout/site-header"
 import { Contact } from "@/components/sections/contact"
@@ -17,12 +15,12 @@ export default function Home() {
       <SiteHeader />
       <main id="main">
         <Hero />
-        <Entries id="experience" index="01" title="Experience" icon={Briefcase} entries={experience} />
-        <Entries id="projects" index="02" title="Projects" icon={Folder} entries={projects} />
-        <Skills index="03" />
-        <Entries id="achievements" index="04" title="Achievements" icon={Trophy} entries={achievements} columns={2} />
-        <Entries id="education" index="05" title="Education" icon={GraduationCap} entries={education} />
-        <Contact index="06" />
+        <Entries id="experience" title="Experience" entries={experience} />
+        <Entries id="projects" title="Projects" entries={projects} as="cards" />
+        <Skills />
+        <Entries id="achievements" title="Achievements" entries={achievements} />
+        <Entries id="education" title="Education" entries={education} />
+        <Contact />
       </main>
       <SiteFooter />
     </>

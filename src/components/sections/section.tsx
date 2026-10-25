@@ -1,33 +1,19 @@
-import type { LucideIcon } from "lucide-react"
-
 import { Separator } from "@/components/ui/separator"
 
-export function Section({
-  id,
-  index,
-  title,
-  icon: Icon,
-  children,
-}: {
-  id: string
-  /** Shown before the title, e.g. "01". */
-  index: string
-  title: string
-  icon: LucideIcon
-  children: React.ReactNode
-}) {
+// On wide screens the section name sits in a narrow left column and stays in
+// view while its content scrolls; on phones it stacks above the content.
+export function Section({ id, title, children }: { id: string; title: string; children: React.ReactNode }) {
   return (
-    <section id={id} aria-labelledby={`${id}-heading`} className="mx-auto max-w-3xl px-6 max-sm:px-4">
+    <section id={id} aria-labelledby={`${id}-heading`} className="mx-auto max-w-4xl px-6 max-sm:px-4">
       <Separator />
-      <div className="py-14 max-sm:py-10">
-        <div className="mb-6 flex items-center gap-3 text-muted-foreground">
-          <span className="font-mono text-xs">{index}</span>
-          <Icon className="size-4" aria-hidden="true" />
-          <h2 id={`${id}-heading`} className="text-[13px] font-medium tracking-[0.06em] uppercase">
-            {title}
-          </h2>
-        </div>
-        {children}
+      <div className="grid gap-6 py-16 md:grid-cols-[9rem_minmax(0,1fr)] md:gap-12 max-sm:py-12">
+        <h2
+          id={`${id}-heading`}
+          className="text-sm font-medium text-muted-foreground md:sticky md:top-20 md:self-start md:pt-px"
+        >
+          {title}
+        </h2>
+        <div>{children}</div>
       </div>
     </section>
   )

@@ -1,5 +1,3 @@
-import type { LucideIcon } from "lucide-react"
-
 // Text fields marked "rich" accept two pieces of markup:
 //   **bold**  and  [label](https://link)   (a label may itself be **bold**)
 
@@ -11,8 +9,8 @@ export type Link = {
 export type Entry = {
   title: string
   href?: string
-  /** Shown after the title, e.g. the programme a project was built for. */
-  suffix?: string
+  /** A line under the title, e.g. the programme a project was built for. */
+  context?: string
   badge?: { label: string; solid?: boolean }
   date?: string
   /** A link in the top-right corner, e.g. Visit, Source, Certificate. */
@@ -26,6 +24,5 @@ export type Entry = {
 
 export type SkillGroup = {
   title: string
-  icon: LucideIcon
   items: string[]
 }

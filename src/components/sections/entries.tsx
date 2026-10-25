@@ -1,34 +1,36 @@
-import type { LucideIcon } from "lucide-react"
-
 import { Section } from "@/components/sections/section"
-import { EntryCard } from "@/components/shared/entry-card"
+import { EntryRow } from "@/components/shared/entry-row"
+import { ProjectCard } from "@/components/shared/project-card"
 import type { Entry } from "@/content/types"
-import { cn } from "@/lib/utils"
 
-// Experience, projects, achievements and education all render the same way:
-// a numbered section holding cards, in one column or, for short cards, two.
+// Projects are separate things you can open, so they get cards. Experience,
+// education and achievements read as a list, so they stay plain rows.
 export function Entries({
   id,
-  index,
   title,
-  icon,
   entries,
-  columns = 1,
+  as = "rows",
 }: {
   id: string
-  index: string
   title: string
-  icon: LucideIcon
   entries: Entry[]
-  columns?: 1 | 2
+  as?: "rows" | "cards"
 }) {
   return (
-    <Section id={id} index={index} title={title} icon={icon}>
-      <div className={cn("grid gap-3", columns === 2 && "sm:grid-cols-2")}>
-        {entries.map((entry) => (
-          <EntryCard key={entry.title} entry={entry} />
-        ))}
-      </div>
+    <Section id={id} title={title}>
+      {as === "cards" ? (
+        <div className="grid gap-3">
+          {entries.map((entry) => (
+            <ProjectCard key={entry.title} project={entry} />
+          ))}
+        </div>
+      ) : (
+        <div className="grid gap-10">
+          {entries.map((entry) => (
+            <EntryRow key={entry.title} entry={entry} />
+          ))}
+        </div>
+      )}
     </Section>
   )
 }

@@ -12,7 +12,7 @@ const LINKS = [
 export function SiteFooter() {
   return (
     <footer className="border-t pt-7 pb-10">
-      <div className="mx-auto flex max-w-3xl flex-wrap items-center justify-between gap-4 px-6 max-sm:px-4">
+      <div className="mx-auto flex max-w-4xl flex-wrap items-center justify-between gap-4 px-6 max-sm:px-4">
         <div className="flex flex-wrap gap-x-4 gap-y-2">
           {LINKS.map(({ label, href }) => (
             <a
@@ -25,7 +25,7 @@ export function SiteFooter() {
             </a>
           ))}
         </div>
-        <p className="inline-flex items-center gap-2 font-mono text-xs text-muted-foreground">
+        <p className="inline-flex items-center gap-2 text-[13px] text-muted-foreground">
           <Mark className="size-4" />© {new Date().getFullYear()} {profile.name}
         </p>
       </div>

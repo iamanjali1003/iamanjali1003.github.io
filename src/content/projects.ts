@@ -38,7 +38,7 @@ export const projects: Entry[] = [
   {
     title: "Midas",
     href: github("forage-midas"),
-    suffix: "— JPMorgan Chase Software Engineering Simulation",
+    context: "JPMorgan Chase software engineering simulation",
     action: { label: "Certificate", href: "https://drive.google.com/file/d/1I1JZLDGKprwv0Qwg48M_Yq4-xte1_kWC/view" },
     tech: ["Java", "Spring Boot", "Kafka", "JPA"],
     points: [

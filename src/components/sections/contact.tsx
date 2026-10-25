@@ -1,8 +1,7 @@
-import { FileText, Github, Linkedin, Mail, User } from "lucide-react"
+import { FileText, Github, Linkedin } from "lucide-react"
 
 import { Section } from "@/components/sections/section"
 import { Button } from "@/components/ui/button"
-import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { profile } from "@/content/profile"
 
 const LINKS = [
@@ -11,31 +10,28 @@ const LINKS = [
   { label: "GitHub", href: profile.links.github, icon: Github },
 ]
 
-export function Contact({ index }: { index: string }) {
+export function Contact() {
   return (
-    <Section id="contact" index={index} title="Contact" icon={User}>
-      <Card className="gap-6 py-6">
-        <CardHeader className="gap-2 px-6 max-sm:px-5">
-          <CardTitle className="text-xl tracking-[-0.02em]">Get in touch</CardTitle>
-          <CardDescription className="max-w-[60ch] text-[15px] leading-relaxed">{profile.contact}</CardDescription>
-        </CardHeader>
-        <CardFooter className="flex-wrap gap-2 px-6 max-sm:px-5">
-          <Button asChild>
-            <a href={`mailto:${profile.email}`}>
-              <Mail />
-              {profile.email}
+    <Section id="contact" title="Contact">
+      <p className="max-w-[30ch] text-[clamp(20px,2.6vw,27px)] leading-snug tracking-[-0.02em] text-balance">
+        {profile.contact}
+      </p>
+      <a
+        href={`mailto:${profile.email}`}
+        className="mt-5 inline-block text-lg font-medium underline decoration-border underline-offset-[6px] transition-colors hover:decoration-foreground"
+      >
+        {profile.email}
+      </a>
+      <div className="mt-8 flex flex-wrap gap-2">
+        {LINKS.map(({ label, href, icon: Icon }) => (
+          <Button key={label} variant="outline" asChild>
+            <a href={href} target="_blank" rel="noopener noreferrer">
+              <Icon />
+              {label}
             </a>
           </Button>
-          {LINKS.map(({ label, href, icon: Icon }) => (
-            <Button key={label} variant="outline" asChild>
-              <a href={href} target="_blank" rel="noopener noreferrer">
-                <Icon />
-                {label}
-              </a>
-            </Button>
-          ))}
-        </CardFooter>
-      </Card>
+        ))}
+      </div>
     </Section>
   )
 }
