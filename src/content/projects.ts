@@ -43,7 +43,7 @@ export const projects: Entry[] = [
     action: { label: "Certificate", href: "https://drive.google.com/file/d/1I1JZLDGKprwv0Qwg48M_Yq4-xte1_kWC/view" },
     tech: ["Java", "Spring Boot", "Kafka", "JPA"],
     points: [
-      "Integrated **Kafka**, H2 persistence and a REST Incentive API into one **Spring Boot** service tracking user balances",
+      "Integrated **Kafka**, H2 persistence and a REST Incentive API into one **Spring Boot** microservice",
       "Wrote Kafka consumers that deserialize and validate transactions, tested against **embedded Kafka**",
       "Built a **REST** endpoint, GET /balance, that returns a user's balance as JSON from the database",
     ],
