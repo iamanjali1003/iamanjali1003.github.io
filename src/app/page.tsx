@@ -8,6 +8,7 @@ import { achievements } from "@/content/achievements"
 import { education } from "@/content/education"
 import { experience } from "@/content/experience"
 import { projects } from "@/content/projects"
+import { writing } from "@/content/writing"
 
 export default function Home() {
   return (
@@ -17,6 +18,7 @@ export default function Home() {
         <Hero />
         <Entries id="experience" title="Experience" entries={experience} />
         <Entries id="projects" title="Projects" entries={projects} as="cards" />
+        <Entries id="writing" title="Writing" entries={writing} />
         <Skills />
         <Entries id="achievements" title="Achievements" entries={achievements} />
         <Entries id="education" title="Education" entries={education} />

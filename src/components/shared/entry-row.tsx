@@ -13,7 +13,11 @@ export function EntryRow({ entry }: { entry: Entry }) {
       <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
         <h3 className="flex flex-wrap items-center gap-2 text-base font-semibold tracking-[-0.01em]">
           {href ? (
-            <a href={href} target="_blank" rel="noopener noreferrer" className="underline-offset-4 hover:underline">
+            <a
+              href={href}
+              {...(href.startsWith("http") && { target: "_blank", rel: "noopener noreferrer" })}
+              className="underline-offset-4 hover:underline"
+            >
               {title}
             </a>
           ) : (
@@ -28,9 +32,11 @@ export function EntryRow({ entry }: { entry: Entry }) {
           <RichText text={subtitle} />
         </p>
       )}
-      <div className="mt-3">
-        <BulletList points={points} />
-      </div>
+      {points.length > 0 && (
+        <div className="mt-3">
+          <BulletList points={points} />
+        </div>
+      )}
     </article>
   )
 }

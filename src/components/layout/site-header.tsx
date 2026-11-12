@@ -1,6 +1,7 @@
 "use client"
 
 import { FileText } from "lucide-react"
+import Link from "next/link"
 
 import { CommandMenu } from "@/components/layout/command-menu"
 import { MainNav } from "@/components/layout/main-nav"
@@ -18,10 +19,10 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 border-b bg-background/80 backdrop-blur-md backdrop-saturate-[1.8]">
       <div className="mx-auto flex h-14 max-w-4xl items-center gap-4 px-6 max-sm:px-4">
-        <a href="#main" className="inline-flex shrink-0 items-center gap-2 text-sm font-semibold tracking-[-0.02em]">
+        <Link href="/#main" className="inline-flex shrink-0 items-center gap-2 text-sm font-semibold tracking-[-0.02em]">
           <Mark className="size-5" />
           {profile.name}
-        </a>
+        </Link>
 
         <MainNav active={active} />
 

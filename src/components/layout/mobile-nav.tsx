@@ -1,6 +1,7 @@
 "use client"
 
 import { FileText, Menu } from "lucide-react"
+import { useRouter } from "next/navigation"
 import { useRef, useState } from "react"
 
 import { Mark } from "@/components/shared/mark"
@@ -21,15 +22,22 @@ import { cn } from "@/lib/utils"
 export function MobileNav({ active }: { active: string | null }) {
   const [open, setOpen] = useState(false)
   const pendingSection = useRef<string | null>(null)
+  const router = useRouter()
 
   // As in the command menu: let the sheet close and skip returning focus to the
-  // menu button, which would cancel the smooth scroll, then scroll.
+  // menu button, which would cancel the smooth scroll, then scroll. On a blog
+  // post the section is not on the page, so go to it on the home page instead.
   function onCloseAutoFocus(event: Event) {
     const id = pendingSection.current
     if (!id) return
     event.preventDefault()
     pendingSection.current = null
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" })
+    const section = document.getElementById(id)
+    if (!section) {
+      router.push(`/#${id}`)
+      return
+    }
+    section.scrollIntoView({ behavior: "smooth" })
     history.replaceState(null, "", `#${id}`)
   }
 
@@ -61,7 +69,7 @@ export function MobileNav({ active }: { active: string | null }) {
               )}
             >
               <a
-                href={`#${id}`}
+                href={`/#${id}`}
                 onClick={(event) => {
                   event.preventDefault()
                   pendingSection.current = id

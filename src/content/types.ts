@@ -22,6 +22,16 @@ export type Entry = {
   points: string[]
 }
 
+export type Post = {
+  /** The page lives at /blog/<slug>/ and its body in src/content/posts/<slug>.tsx. */
+  slug: string
+  title: string
+  description: string
+  /** ISO date, e.g. 2026-11-12. */
+  date: string
+  readingTime: string
+}
+
 export type SkillGroup = {
   title: string
   items: string[]

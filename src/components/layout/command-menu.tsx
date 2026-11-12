@@ -4,6 +4,7 @@ import {
   ArrowUpRight, FileText, Folder, Github, Hash, Linkedin, Mail, Monitor, Moon, Search, Sun, Terminal,
 } from "lucide-react"
 import { useTheme } from "next-themes"
+import { useRouter } from "next/navigation"
 import { useEffect, useRef, useState } from "react"
 
 import { Button } from "@/components/ui/button"
@@ -42,6 +43,7 @@ export function CommandMenu() {
   const [open, setOpen] = useState(false)
   const pendingSection = useRef<string | null>(null)
   const { setTheme } = useTheme()
+  const router = useRouter()
 
   useEffect(() => {
     function onKeyDown(event: KeyboardEvent) {
@@ -66,12 +68,18 @@ export function CommandMenu() {
     setOpen(false)
   }
 
+  // On a blog post the section is not on the page, so go to it on the home page.
   function onCloseAutoFocus(event: Event) {
     const id = pendingSection.current
     if (!id) return
     event.preventDefault()
     pendingSection.current = null
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" })
+    const section = document.getElementById(id)
+    if (!section) {
+      router.push(`/#${id}`)
+      return
+    }
+    section.scrollIntoView({ behavior: "smooth" })
     history.replaceState(null, "", `#${id}`)
   }
 
