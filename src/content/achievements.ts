@@ -1,6 +1,6 @@
-import type { Entry } from "./types"
+import type { Achievement } from "./types"
 
-export const achievements: Entry[] = [
+export const achievements: Achievement[] = [
   {
     title: "Competitive programming",
     date: "2024 — Present",

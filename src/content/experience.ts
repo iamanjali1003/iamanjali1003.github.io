@@ -1,10 +1,12 @@
-import type { Entry } from "./types"
+import type { ResumeEntry } from "./types"
 
-export const experience: Entry[] = [
+export const experience: ResumeEntry[] = [
   {
     title: "Software QA Intern",
-    date: "Sep — Nov 2026",
     subtitle: "[Evaratus](https://www.evaratus.com/) (Scaler AI Labs) · Bengaluru",
+    date: "Sep — Nov 2026",
+    summary:
+      "Annotated and reviewed text data for AI training, labelling personal information by entity type under strict privacy rules.",
     points: [
       "Annotated text data for **AI training**, labelling **personally identifiable information (PII)** by entity type",
       "Reviewed every document end to end for accuracy, completeness and **label consistency** before QA review",

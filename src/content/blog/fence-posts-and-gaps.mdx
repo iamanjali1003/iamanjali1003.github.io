@@ -1,0 +1,104 @@
+---
+title: "Fence posts and gaps: the bug in my first Kubernetes PR"
+description: "Why a benchmark reported 1.25 requests per second when the real rate was 1.0, and what fixing it taught me about contributing to open source."
+date: "2026-11-12"
+---
+
+My first pull request to Kubernetes changed one line of math. This post is about that line: what was wrong with it, how wrong, and why a one-line fix still touched five files.
+
+## The tool
+
+[inference-perf](https://github.com/kubernetes-sigs/inference-perf) is a Kubernetes project for benchmarking LLM inference servers like vLLM and SGLang. You give it a load, say 40 requests per second for 15 seconds. It sends requests on that schedule, records when each one went out and when it came back, and writes a report.
+
+One number in that report is `achieved_rate`: how fast requests actually went out. You read it next to `requested_rate`, the rate you asked for. If the achieved rate falls well short, the server couldn’t keep up, and every latency number in that stage describes an overloaded server, not the load you configured. So this one number decides whether you can trust the rest of the report.
+
+## The bug
+
+Simplified a little, the report worked it out like this:
+
+```python title="Before"
+send_duration = max(starts) - min(starts)
+achieved_rate = len(metrics) / send_duration
+```
+
+Picture five requests sent one second apart, at 0, 1, 2, 3 and 4 seconds.
+
+<FencePostDiagram />
+
+From the first send to the last is 4 seconds. Five requests over 4 seconds is 1.25 per second. But the requests went out once a second, so the real rate is 1.0.
+
+It’s the fence-post problem: five posts, four gaps. A rate is about the gaps between sends, and five sends only have four gaps between them. The fix divides by the gaps:
+
+```python title="After"
+achieved_rate = (len(metrics) - 1) / send_duration
+```
+
+## How wrong was it?
+
+Counting n requests instead of n − 1 gaps inflates the rate by n ÷ (n − 1). How much that matters depends on how many requests a stage sends:
+
+| Requests | Reported | Real | Too high by |
+| -------- | -------- | ---- | ----------- |
+| 2        | 2.0      | 1.0  | 100%        |
+| 5        | 1.25     | 1.0  | 25%         |
+| 30       | 1.034    | 1.0  | 3.4%        |
+| 600      | 1.0017   | 1.0  | 0.17%       |
+
+Short stages were badly off. Long ones were almost right, and nobody spots 0.17% by looking at one report. The bug wasn’t hidden, though. A test already pinned the old value, with a note saying it asserted “the shipped definition rather than the intended one”, pointing at the issue I picked up, [#821](https://github.com/kubernetes-sigs/inference-perf/issues/821).
+
+## Biased, not just noisy
+
+Real schedules aren’t perfectly even. The constant-rate timer in inference-perf adds a little randomness to each gap, so the achieved rate wobbles from run to run. That part is fine: noise averages out.
+
+The old formula did something worse than wobble. It was biased: it came out high in every single run. A short simulation shows it, with 600 requests at 40 per second and the gaps drawn the way the timer draws them:
+
+```python
+import numpy as np
+
+rng = np.random.default_rng()
+n, rate = 600, 40.0
+duration = n / rate
+
+# Like inference-perf's constant timer: random gaps, scaled to fill the duration.
+gaps = rng.exponential(1 / rate, (100_000, n))
+gaps *= duration / gaps.sum(axis=1, keepdims=True)
+sends = gaps.cumsum(axis=1)
+span = sends[:, -1] - sends[:, 0]
+
+old = n / span
+new = (n - 1) / span
+print(f"old: {old.mean():.2f}/s, too high in {np.mean(old > rate):.0%} of runs")
+print(f"new: {new.mean():.2f}/s, too high in {np.mean(new > rate):.0%} of runs")
+```
+
+```text title="Output"
+old: 40.07/s, too high in 100% of runs
+new: 40.00/s, too high in 37% of runs
+```
+
+With the old formula, every run overshoots. With the new one, the average lands on 40 and runs fall on both sides of it. Only 37% come out high rather than half, because the error is lopsided: most runs land slightly under, and a few land further over.
+
+That difference matters more than the size of the error. Running a benchmark more times shrinks noise. It never shrinks bias: every report drifts the same way.
+
+## Why one line touched five files
+
+- The report code itself.
+- An end-to-end test helper that recomputes the rate from the raw send times, to cross-check the report. It used the same formula, so it had to change in the same PR, or the cross-check would have failed against the fixed report.
+- Four tests across two files that pinned the old numbers: 1.25 became 1.0, 4 ÷ 1.5 became 3 ÷ 1.5, and so on. In this project a test is pinned behavior. You don’t edit one to make it pass. You say in the PR which behavior changed and why.
+- A sample report in the docs. It showed 30 requests over 29.6 seconds reaching 1.013 against a requested 1.0. Recomputed from its own numbers, it reads 0.980.
+
+Before the fix, the updated tests failed on main, and the PR quoted that failure. The project asks for exactly that: show the test failing first, then show the fix making it pass.
+
+## What I left alone
+
+One request, or a burst sent at the same instant, gives a send window of zero seconds. The report shows `0.0` for that, which reads like “no throughput”. “No value” would be more honest, but it changes the report format other tools read, so it’s the maintainers’ call. I asked on the issue and kept it out of the PR.
+
+## What happened next
+
+A maintainer reviewed it, the end-to-end rate test passed for both constant and Poisson arrivals, and it [merged](https://github.com/kubernetes-sigs/inference-perf/pull/1055) the next day. In the same review they opened a [follow-up issue](https://github.com/kubernetes-sigs/inference-perf/issues/1070): three places in comments and docs still described the old math. That’s my next PR.
+
+## What I’d tell myself a week ago
+
+- **Claim before you code.** The first two issues I wanted were picked up by another contributor overnight, before I’d commented.
+- **Read the contributing guide first.** This project wants an issue assigned before a PR, a test that fails first, and a set PR format. Following it is half of a fast review.
+- **Small and clear beats big and clever.** One idea per PR is easy to review, and easy to merge.

@@ -1,23 +1,46 @@
 "use client"
 
-import { Moon, Sun } from "lucide-react"
+import { Check, Monitor, Moon, Sun } from "lucide-react"
 import { useTheme } from "next-themes"
 
-export function ThemeToggle() {
-  const { resolvedTheme, setTheme } = useTheme()
+import { Button } from "@/components/ui/button"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+import { useKeyboardOnlyReturnFocus } from "@/hooks/use-keyboard-only-return-focus"
 
-  // Which icon shows is decided by CSS, so the server and client render the
-  // same markup and there is nothing to mismatch on hydration.
+export const THEMES = [
+  { value: "light", label: "Light", icon: Sun },
+  { value: "dark", label: "Dark", icon: Moon },
+  { value: "system", label: "System", icon: Monitor },
+] as const
+
+export function ThemeToggle() {
+  const { theme, setTheme } = useTheme()
+  const returnFocus = useKeyboardOnlyReturnFocus()
+
+  // Which icon the button shows is decided by CSS, so the server and the client
+  // render the same markup and nothing mismatches on hydration.
   return (
-    <button
-      type="button"
-      aria-label="Toggle theme"
-      title="Toggle theme"
-      onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
-      className="-mr-2 inline-flex size-8 items-center justify-center text-muted-foreground transition-colors hover:text-foreground"
-    >
-      <Sun className="hidden size-4 dark:block" aria-hidden="true" />
-      <Moon className="size-4 dark:hidden" aria-hidden="true" />
-    </button>
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant="ghost" size="icon-sm" aria-label="Change theme">
+          <Sun className="dark:hidden" aria-hidden="true" />
+          <Moon className="hidden dark:block" aria-hidden="true" />
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="end" className="min-w-36" onCloseAutoFocus={returnFocus}>
+        {THEMES.map(({ value, label, icon: Icon }) => (
+          <DropdownMenuItem key={value} onSelect={() => setTheme(value)}>
+            <Icon aria-hidden="true" />
+            {label}
+            {theme === value && <Check className="ml-auto" aria-label="Selected" />}
+          </DropdownMenuItem>
+        ))}
+      </DropdownMenuContent>
+    </DropdownMenu>
   )
 }

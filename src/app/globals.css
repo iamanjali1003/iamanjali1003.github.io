@@ -1,9 +1,11 @@
 @import "tailwindcss";
+@import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
 
-/* shadcn/ui tokens on the neutral scale, strictly monochrome.
-   Every radius is zero: the brand has no rounded corners. */
+/* shadcn/ui tokens on the neutral scale, strictly monochrome (see brand/BRAND.md).
+   Every radius is zero: the brand has no rounded corners. Changing --radius-* here
+   is the one switch to rounded corners if that ever changes. */
 
 @theme inline {
   --color-background: var(--background);
@@ -20,12 +22,13 @@
   --color-muted-foreground: var(--muted-foreground);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
 
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: ui-monospace, Menlo, monospace;
+  --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
 
   --radius-xs: 0;
   --radius-sm: 0;
@@ -52,17 +55,29 @@
   --muted-foreground: #737373;
   --accent: #f5f5f5;
   --accent-foreground: #171717;
+  --destructive: #dc2626;
   --border: #e5e5e5;
   --input: #e5e5e5;
-  --ring: #0a0a0a;
+  --ring: #a3a3a3;
+
+  /* Code in posts (sugar-high): shades of grey, with weight for keywords. */
+  --sh-class: #0a0a0a;
+  --sh-identifier: #262626;
+  --sh-sign: #8a8a8a;
+  --sh-property: #404040;
+  --sh-entity: #404040;
+  --sh-jsxliterals: #404040;
+  --sh-string: #5c5c5c;
+  --sh-keyword: #0a0a0a;
+  --sh-comment: #a3a3a3;
 }
 
 .dark {
   --background: #0a0a0a;
   --foreground: #fafafa;
-  --card: #0a0a0a;
+  --card: #0f0f0f;
   --card-foreground: #fafafa;
-  --popover: #0a0a0a;
+  --popover: #0f0f0f;
   --popover-foreground: #fafafa;
   --primary: #fafafa;
   --primary-foreground: #171717;
@@ -72,29 +87,58 @@
   --muted-foreground: #a3a3a3;
   --accent: #262626;
   --accent-foreground: #fafafa;
+  --destructive: #f87171;
   --border: #262626;
   --input: #262626;
-  --ring: #d4d4d4;
+  --ring: #737373;
+
+  --sh-class: #fafafa;
+  --sh-identifier: #e5e5e5;
+  --sh-sign: #8a8a8a;
+  --sh-property: #d4d4d4;
+  --sh-entity: #d4d4d4;
+  --sh-jsxliterals: #d4d4d4;
+  --sh-string: #b5b5b5;
+  --sh-keyword: #fafafa;
+  --sh-comment: #737373;
+}
+
+/* The page column every page shares, so all edges line up. */
+@utility page-container {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 64rem;
+  padding-inline: 1.5rem;
+  @media (width < 40rem) {
+    padding-inline: 1rem;
+  }
 }
 
 @layer base {
   * {
-    @apply border-border;
+    @apply border-border outline-ring/50;
   }
   html {
     scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
   }
   body {
-    @apply bg-background font-sans text-[15px] text-foreground antialiased;
+    @apply bg-background font-sans text-foreground antialiased;
     font-feature-settings: "cv11", "ss01";
   }
-  :focus-visible {
-    @apply outline-2 outline-offset-2 outline-ring;
+  ::selection {
+    @apply bg-foreground text-background;
   }
   /* Lucide draws round caps and joins; square them to match the brand. */
   svg.lucide {
     stroke-linecap: square;
     stroke-linejoin: miter;
+  }
+  .sh__token--keyword {
+    font-weight: 600;
+  }
+  .sh__token--comment {
+    font-style: italic;
   }
 }
 

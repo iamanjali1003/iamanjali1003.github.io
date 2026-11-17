@@ -1,110 +1,128 @@
-import { ArrowLeft } from "lucide-react"
 import type { Metadata } from "next"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 
-import { Container } from "@/components/layout/container"
-import { SiteFooter } from "@/components/layout/site-footer"
-import { SiteHeader } from "@/components/layout/site-header"
-import FencePostsAndGaps from "@/content/posts/fence-posts-and-gaps"
-import { profile } from "@/content/profile"
-import { formatPostDate, posts } from "@/content/writing"
-import { OG_SIZE } from "@/lib/og"
-
-// Every post's body, by slug. The static export builds one page per entry in posts.
-const bodies: Record<string, () => React.JSX.Element> = {
-  "fence-posts-and-gaps": FencePostsAndGaps,
-}
-
-export const dynamicParams = false
-
-export function generateStaticParams() {
-  return posts.map(({ slug }) => ({ slug }))
-}
+import { MdxContent } from "@/components/blog/mdx-content"
+import { PostPager } from "@/components/blog/post-pager"
+import { ShareButtons } from "@/components/blog/share-buttons"
+import { TableOfContents } from "@/components/blog/table-of-contents"
+import { JsonLd } from "@/components/shared/json-ld"
+import { Mark } from "@/components/shared/mark"
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb"
+import { pages } from "@/config/pages"
+import { absoluteUrl, siteConfig } from "@/config/site"
+import { getAdjacentPosts, getPost, getPosts, toSummary } from "@/lib/blog"
+import { formatDate } from "@/lib/format"
+import { blogPostingSchema, breadcrumbSchema } from "@/lib/json-ld"
+import { createMetadata } from "@/lib/seo"
 
 type Props = { params: Promise<{ slug: string }> }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug } = await params
-  const post = posts.find((p) => p.slug === slug)
-  if (!post) return {}
+// One page per post, built at export time. Unknown slugs are a 404.
+export const dynamicParams = false
 
-  const url = `/blog/${post.slug}/`
-  // Drawn by ./og.png/route.tsx from the post's title.
-  const image = { url: `/blog/${post.slug}/og.png`, ...OG_SIZE, alt: post.title }
-  return {
-    title: `${post.title} · ${profile.name}`,
+export function generateStaticParams() {
+  return getPosts().map(({ slug }) => ({ slug }))
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const post = getPost((await params).slug)
+  if (!post) return {}
+  return createMetadata({
+    title: post.title,
     description: post.description,
-    authors: [{ name: profile.name, url: `${profile.url}/` }],
-    alternates: { canonical: url },
-    openGraph: {
-      type: "article",
-      url,
-      siteName: profile.name,
-      locale: "en_IN",
-      title: post.title,
-      description: post.description,
-      publishedTime: post.date,
-      authors: [profile.name],
-      images: [image],
-    },
-    twitter: { card: "summary_large_image", title: post.title, description: post.description, images: [image] },
-  }
+    path: `/blog/${post.slug}/`,
+    type: "article",
+    publishedTime: post.date,
+    modifiedTime: post.updated,
+  })
 }
 
 export default async function PostPage({ params }: Props) {
-  const { slug } = await params
-  const post = posts.find((p) => p.slug === slug)
-  const Body = bodies[slug]
-  if (!post || !Body) notFound()
+  const post = getPost((await params).slug)
+  if (!post) notFound()
 
-  const article = {
-    "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    headline: post.title,
-    description: post.description,
-    datePublished: post.date,
-    url: `${profile.url}/blog/${post.slug}/`,
-    image: `${profile.url}/blog/${post.slug}/og.png`,
-    author: { "@type": "Person", name: profile.name, url: `${profile.url}/` },
-  }
+  const { newer, older } = getAdjacentPosts(post.slug)
+  const url = absoluteUrl(`/blog/${post.slug}/`)
 
   return (
     <>
-      <SiteHeader />
-      <main id="main" className="flex-1">
-        <Container as="article" className="pt-10 sm:pt-16">
-          <Link
-            href="/blog/"
-            className="inline-flex items-center gap-1.5 text-[13px] text-muted-foreground transition-colors hover:text-foreground"
-          >
-            <ArrowLeft className="size-3.5" aria-hidden="true" />
-            Writing
-          </Link>
-          <h1 className="mt-8 text-[clamp(30px,5vw,42px)] leading-[1.1] font-semibold tracking-[-0.035em] text-balance">
-            {post.title}
-          </h1>
-          <p className="mt-5 text-lg leading-relaxed text-pretty text-muted-foreground">{post.description}</p>
-          <p className="mt-6 border-b pb-10 text-[13px] text-muted-foreground tabular-nums">
-            <time dateTime={post.date}>{formatPostDate(post.date)}</time> · {post.readingTime}
-          </p>
-          <Body />
-          <div className="mt-16 flex items-center justify-between gap-4 border-t pt-8 text-[13px]">
-            <Link
-              href="/blog/"
-              className="inline-flex items-center gap-1.5 text-muted-foreground transition-colors hover:text-foreground"
-            >
-              <ArrowLeft className="size-3.5" aria-hidden="true" />
-              All writing
-            </Link>
-            <Link href="/" className="text-muted-foreground transition-colors hover:text-foreground">
-              About {profile.name}
-            </Link>
+      <JsonLd
+        graph={[
+          blogPostingSchema(post),
+          breadcrumbSchema([
+            { name: pages.blog.title, path: pages.blog.path },
+            { name: post.title, path: `/blog/${post.slug}/` },
+          ]),
+        ]}
+      />
+      <div className="grid gap-12 py-10 lg:grid-cols-[minmax(0,1fr)_14rem]">
+        <article className="max-w-2xl min-w-0">
+          <Breadcrumb>
+            <BreadcrumbList>
+              <BreadcrumbItem>
+                <BreadcrumbLink asChild>
+                  <Link href="/">Home</Link>
+                </BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem>
+                <BreadcrumbLink asChild>
+                  <Link href={pages.blog.path}>{pages.blog.title}</Link>
+                </BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem className="min-w-0">
+                <BreadcrumbPage className="truncate">{post.title}</BreadcrumbPage>
+              </BreadcrumbItem>
+            </BreadcrumbList>
+          </Breadcrumb>
+
+          <header className="mt-6 border-b pb-6">
+            <h1 className="text-4xl font-semibold tracking-tight text-balance max-sm:text-3xl">{post.title}</h1>
+            <p className="mt-4 text-lg leading-relaxed text-pretty text-muted-foreground">{post.description}</p>
+            <div className="mt-6 flex items-center gap-3 text-sm">
+              <Mark className="size-8" />
+              <div>
+                <Link href={pages.about.path} rel="author" className="font-medium hover:underline underline-offset-4">
+                  {siteConfig.author.name}
+                </Link>
+                <p className="text-muted-foreground tabular-nums">
+                  <time dateTime={post.date}>{formatDate(post.date)}</time> · {post.readingTime}
+                  {post.updated && (
+                    <>
+                      {" "}
+                      · Updated <time dateTime={post.updated}>{formatDate(post.updated)}</time>
+                    </>
+                  )}
+                </p>
+              </div>
+              <div className="ml-auto">
+                <ShareButtons url={url} title={post.title} />
+              </div>
+            </div>
+          </header>
+
+          <div className="mt-2">
+            <MdxContent source={post.body} />
           </div>
-        </Container>
-      </main>
-      <SiteFooter />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(article) }} />
+
+          <PostPager newer={newer && toSummary(newer)} older={older && toSummary(older)} />
+        </article>
+
+        <aside className="max-lg:hidden">
+          <div className="sticky top-24">
+            <TableOfContents headings={post.headings} />
+          </div>
+        </aside>
+      </div>
     </>
   )
 }

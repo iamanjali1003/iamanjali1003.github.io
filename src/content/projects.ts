@@ -1,13 +1,15 @@
-import type { Entry } from "./types"
+import type { Project } from "./types"
 
 const github = (repo: string) => `https://github.com/iamanjali1003/${repo}`
 
-export const projects: Entry[] = [
+// In the order they appear. featured: true puts a project on the home page.
+export const projects: Project[] = [
   {
-    title: "pixStory",
+    name: "pixStory",
+    area: "Full-stack",
+    featured: true,
     summary: "A shared photo gallery, deployed on AWS.",
     href: github("pixstory"),
-    action: { label: "Source", href: github("pixstory") },
     tech: ["React", "TypeScript", "Node.js", "Express", "MongoDB", "AWS"],
     points: [
       "**Deployed** a photo gallery on **AWS Elastic Beanstalk**, serving the React app and REST API from one origin",
@@ -16,10 +18,11 @@ export const projects: Entry[] = [
     ],
   },
   {
-    title: "datacheck",
+    name: "datacheck",
+    area: "Backend",
+    featured: true,
     summary: "A command-line tool that validates CSV files against rules written in YAML.",
     href: github("datacheck"),
-    action: { label: "Source", href: github("datacheck") },
     tech: ["Java 21", "Maven", "JUnit 5", "GitHub Actions"],
     points: [
       "Built a **CLI** that validates CSV files against YAML rules and exits non-zero on failure, so it can gate a **CI** build",
@@ -28,10 +31,11 @@ export const projects: Entry[] = [
     ],
   },
   {
-    title: "monoCV",
+    name: "monoCV",
+    area: "Frontend",
+    featured: true,
     summary: "A free, ATS-friendly resume builder with PDF export.",
     href: github("monocv"),
-    action: { label: "Source", href: github("monocv") },
     tech: ["Next.js", "TypeScript", "Tailwind CSS", "shadcn/ui", "Zustand", "Zod"],
     points: [
       "Built an **ATS-friendly resume builder** with live preview and **PDF export**, both rendered from one data model",
@@ -40,10 +44,11 @@ export const projects: Entry[] = [
     ],
   },
   {
-    title: "Midas",
+    name: "Midas",
+    area: "Backend",
     summary: "A Spring Boot service that processes transactions from Kafka, built for the JPMorgan Chase software engineering simulation.",
     href: github("forage-midas"),
-    action: { label: "Certificate", href: "https://drive.google.com/file/d/1I1JZLDGKprwv0Qwg48M_Yq4-xte1_kWC/view" },
+    links: [{ label: "Certificate", href: "https://drive.google.com/file/d/1I1JZLDGKprwv0Qwg48M_Yq4-xte1_kWC/view" }],
     tech: ["Java", "Spring Boot", "Kafka", "JPA"],
     points: [
       "Integrated **Kafka**, H2 persistence and a REST Incentive API into one **Spring Boot** microservice",
@@ -52,10 +57,10 @@ export const projects: Entry[] = [
     ],
   },
   {
-    title: "Student Attendance Management System",
+    name: "Student Attendance Management System",
+    area: "Database",
     summary: "A MySQL database for tracking student attendance.",
     href: github("student-attendance-management-system"),
-    action: { label: "Source", href: github("student-attendance-management-system") },
     tech: ["MySQL 8.0", "SQL", "Stored Procedures", "Triggers"],
     points: [
       "Designed a **3NF** schema of **7 tables**, with a composite unique key allowing one mark per student, course and date",

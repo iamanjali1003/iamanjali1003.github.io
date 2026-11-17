@@ -6,17 +6,21 @@ export type Link = {
   href: string
 }
 
-export type Entry = {
-  title: string
-  href?: string
-  /** One plain sentence under the title: what the thing is. */
-  summary?: string
-  date?: string
-  /** A link on the right of the title, e.g. Source or Certificate. */
-  action?: Link
-  /** rich */
-  subtitle?: string
-  tech?: string[]
+export const PROJECT_AREAS = ["Full-stack", "Backend", "Frontend", "Database"] as const
+export type ProjectArea = (typeof PROJECT_AREAS)[number]
+
+export type Project = {
+  name: string
+  area: ProjectArea
+  /** One plain sentence: what it is. */
+  summary: string
+  /** Shown on the home page. */
+  featured?: boolean
+  /** The main link, usually the repository. */
+  href: string
+  /** Extra links shown in the card footer, e.g. a certificate. */
+  links?: Link[]
+  tech: string[]
   /** rich */
   points: string[]
 }
@@ -24,27 +28,37 @@ export type Entry = {
 export type Contribution = {
   /** owner/name, as GitHub shows it. */
   repo: string
+  number: number
   /** What the change did, in plain words rather than the PR's commit-style title. */
   title: string
   href: string
   status: "merged" | "open"
   /** Month it merged, or opened if it is still open, e.g. Nov 2026. */
   date: string
-  /** A short label after the repo, e.g. the event it was part of. */
+  /** Groups the open-source page, e.g. "Kubernetes SIGs". */
+  group: string
   note?: Link
 }
 
-export type Post = {
-  /** The page lives at /blog/<slug>/ and its body in src/content/posts/<slug>.tsx. */
-  slug: string
+export type ResumeEntry = {
   title: string
-  description: string
-  /** ISO date, e.g. 2026-11-12. */
+  /** rich, e.g. the organisation with a link. */
+  subtitle: string
   date: string
-  readingTime: string
+  /** One plain sentence for the home page card. */
+  summary: string
+  /** rich */
+  points: string[]
 }
 
 export type SkillGroup = {
   title: string
   items: string[]
+}
+
+export type Achievement = {
+  title: string
+  date: string
+  /** rich */
+  points: string[]
 }

@@ -1,50 +1,38 @@
+import { Rss } from "lucide-react"
 import type { Metadata } from "next"
 
-import { Container } from "@/components/layout/container"
-import { SiteFooter } from "@/components/layout/site-footer"
-import { SiteHeader } from "@/components/layout/site-header"
-import { PostList } from "@/components/shared/post-list"
-import { profile } from "@/content/profile"
-import { posts } from "@/content/writing"
-import { SITE_IMAGE } from "@/lib/og"
+import { PostCard } from "@/components/blog/post-card"
+import { JsonLd } from "@/components/shared/json-ld"
+import { PageHeader } from "@/components/shared/page-header"
+import { Button } from "@/components/ui/button"
+import { pages } from "@/config/pages"
+import { getPosts, toSummary } from "@/lib/blog"
+import { blogSchema, breadcrumbSchema } from "@/lib/json-ld"
+import { createMetadata } from "@/lib/seo"
 
-const description = "Notes on open source and building software."
+const page = pages.blog
 
-export const metadata: Metadata = {
-  title: `Writing · ${profile.name}`,
-  description,
-  alternates: { canonical: "/blog/" },
-  openGraph: {
-    type: "website",
-    url: "/blog/",
-    siteName: profile.name,
-    locale: "en_IN",
-    title: `Writing · ${profile.name}`,
-    description,
-    images: [SITE_IMAGE],
-  },
-  twitter: { card: "summary_large_image", title: `Writing · ${profile.name}`, description, images: [SITE_IMAGE] },
-}
+export const metadata: Metadata = createMetadata(page)
 
-export default function BlogIndex() {
+export default function BlogPage() {
+  const posts = getPosts()
+
   return (
     <>
-      <SiteHeader />
-      <main id="main" className="flex-1">
-        <Container className="pt-14 sm:pt-24">
-          <div className="flex items-baseline justify-between gap-4">
-            <h1 className="text-[36px] leading-none font-semibold tracking-[-0.045em] sm:text-[44px]">Writing</h1>
-            <a href="/feed.xml" className="text-[13px] text-muted-foreground transition-colors hover:text-foreground">
-              RSS
-            </a>
-          </div>
-          <p className="mt-4 text-[15px] text-muted-foreground">{description}</p>
-          <div className="mt-14">
-            <PostList posts={posts} withDescription />
-          </div>
-        </Container>
-      </main>
-      <SiteFooter />
+      <JsonLd graph={[blogSchema(posts), breadcrumbSchema([{ name: page.title, path: page.path }])]} />
+      <PageHeader page={page}>
+        <Button variant="outline" size="sm" asChild>
+          <a href="/feed.xml">
+            <Rss />
+            RSS feed
+          </a>
+        </Button>
+      </PageHeader>
+      <div className="grid gap-4 md:grid-cols-2">
+        {posts.map((post) => (
+          <PostCard key={post.slug} post={toSummary(post)} as="h2" />
+        ))}
+      </div>
     </>
   )
 }

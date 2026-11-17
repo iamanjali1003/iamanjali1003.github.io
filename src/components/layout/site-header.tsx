@@ -1,32 +1,41 @@
+import { FileText } from "lucide-react"
 import Link from "next/link"
 
-import { Container } from "@/components/layout/container"
+import { CommandMenu } from "@/components/layout/command-menu"
+import { MainNav } from "@/components/layout/main-nav"
+import { MobileNav } from "@/components/layout/mobile-nav"
 import { ThemeToggle } from "@/components/layout/theme-toggle"
 import { Mark } from "@/components/shared/mark"
-import { profile } from "@/content/profile"
+import { Button } from "@/components/ui/button"
+import { siteConfig } from "@/config/site"
+import { projects } from "@/content/projects"
+import { getPosts, toSummary } from "@/lib/blog"
 
-const navLink = "text-[13px] text-muted-foreground transition-colors hover:text-foreground"
-
-// The name on the left; writing, the resume and the theme on the right.
-// The home page is one short column, so it needs no section menu.
 export function SiteHeader() {
+  // Read at build time and handed to the search, which runs in the browser.
+  const searchProjects = projects.map(({ name, href }) => ({ name, href }))
+  const searchPosts = getPosts().map(toSummary)
+
   return (
-    <header>
-      <Container className="flex h-16 items-center justify-between">
-        <Link href="/" className="inline-flex items-center gap-2.5 text-sm font-medium tracking-[-0.01em]">
+    <header className="sticky top-0 z-40 bg-background/80 backdrop-blur-md supports-[backdrop-filter]:bg-background/70">
+      <div className="page-container flex h-14 items-center gap-6">
+        <Link href="/" className="flex shrink-0 items-center gap-2 text-sm font-semibold tracking-tight">
           <Mark className="size-5" />
-          {profile.name}
+          {siteConfig.name}
         </Link>
-        <nav aria-label="Site" className="flex items-center gap-5">
-          <Link href="/blog/" className={navLink}>
-            Writing
-          </Link>
-          <a href={profile.links.resume} target="_blank" rel="noopener noreferrer" className={navLink}>
-            Resume
-          </a>
+        <MainNav />
+        <div className="ml-auto flex items-center gap-1.5">
+          <CommandMenu projects={searchProjects} posts={searchPosts} />
           <ThemeToggle />
-        </nav>
-      </Container>
+          <Button asChild size="sm" className="ml-1 max-sm:hidden">
+            <a href={siteConfig.links.resume} target="_blank" rel="noopener noreferrer">
+              <FileText />
+              Resume
+            </a>
+          </Button>
+          <MobileNav />
+        </div>
+      </div>
     </header>
   )
 }

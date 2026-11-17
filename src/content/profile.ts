@@ -1,21 +1,17 @@
+// The intro on the home and about pages.
 export const profile = {
-  name: "Anjali",
-  role: "Software Engineering Student",
-  headline:
-    "I build full-stack software, from React and Next.js front ends to Java and Node.js services on AWS.",
+  role: "Software engineering student",
+  location: "Bengaluru, India",
+  availability: "Open to SDE internships and new-grad roles",
+  headline: "I build full-stack software, from React and Next.js front ends to Java and Node.js services on AWS.",
   about:
-    "Final-year Information Science & Engineering student at JSS Academy of Technical Education, Bengaluru, graduating in 2027. I contribute to Kubernetes, and I'm open to SDE internships and new-grad roles.",
-  description:
-    "Software engineering student in Bengaluru and Kubernetes contributor. Full-stack products with React, Next.js, Node.js, Java and Spring Boot on AWS.",
-  location: "Bengaluru",
-  email: "iamanjali1003@gmail.com",
-  url: "https://iamanjali1003.github.io",
-  links: {
-    resume: "https://drive.google.com/file/d/1KDk7v-9up1t4L8n-G9C0HnLWMaej5W5T/view",
-    github: "https://github.com/iamanjali1003",
-    linkedin: "https://linkedin.com/in/iamanjali1003",
-    leetcode: "https://leetcode.com/u/iamanjali1003",
-    codechef: "https://www.codechef.com/users/iamanjali1003",
-  },
+    "I'm a final-year Information Science & Engineering student at JSS Academy of Technical Education, Bengaluru, graduating in 2027. I contribute to Kubernetes, and I'm open to SDE internships and new-grad roles.",
   contact: "Email is the fastest way to reach me.",
-}
+  // The "At a glance" card next to the intro. Icons are named in components/home/at-a-glance.tsx.
+  glance: [
+    { icon: "location", label: "Based in", value: "Bengaluru, India" },
+    { icon: "education", label: "Studying", value: "B.E. Information Science & Engineering, JSSATE · 2027" },
+    { icon: "focus", label: "Focus", value: "Full-stack: React, Next.js, Node.js, Java, Spring Boot, AWS" },
+    { icon: "open-source", label: "Open source", value: "Contributor to Kubernetes SIG projects" },
+  ],
+} as const

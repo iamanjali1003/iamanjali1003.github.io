@@ -1,0 +1,16 @@
+# Weekly pull requests for outdated or vulnerable packages and GitHub Actions.
+# Nothing merges by itself: each one runs the deploy workflow's checks first.
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      dependencies:
+        patterns: ["*"]
+        update-types: [minor, patch]
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly

@@ -1,6 +1,6 @@
 import { Fragment, type ReactNode } from "react"
 
-import { TextLink } from "@/components/shared/text-link"
+import { externalProps } from "@/lib/links"
 
 // Renders the two pieces of markup the content files use:
 //   **bold**  and  [label](https://link)
@@ -19,12 +19,17 @@ function render(text: string): ReactNode[] {
           </strong>
         )
       }
-      const link = part.match(LINK)
+      const link = LINK.exec(part)
       if (link) {
         return (
-          <TextLink key={i} href={link[2]}>
+          <a
+            key={i}
+            href={link[2]}
+            {...externalProps(link[2])}
+            className="text-foreground underline decoration-border underline-offset-[3px] transition-colors hover:decoration-foreground"
+          >
             {render(link[1])}
-          </TextLink>
+          </a>
         )
       }
       return <Fragment key={i}>{part}</Fragment>
