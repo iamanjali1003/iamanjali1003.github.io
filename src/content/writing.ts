@@ -1,7 +1,8 @@
-import type { Entry, Post } from "./types"
+import type { Post } from "./types"
 
 // Newest first. A new post adds an entry here and its body in
 // src/content/posts/<slug>.tsx, registered in src/app/blog/[slug]/page.tsx.
+// Its share image is drawn from the title at build time.
 export const posts: Post[] = [
   {
     slug: "fence-posts-and-gaps",
@@ -17,12 +18,3 @@ export const posts: Post[] = [
 export function formatPostDate(date: string) {
   return new Date(date).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" })
 }
-
-// The same posts as rows for the Writing section on the home page.
-export const writing: Entry[] = posts.map(({ slug, title, description, date }) => ({
-  title,
-  href: `/blog/${slug}/`,
-  date: formatPostDate(date),
-  subtitle: description,
-  points: [],
-}))

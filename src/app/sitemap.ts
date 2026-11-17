@@ -8,6 +8,7 @@ export const dynamic = "force-static"
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
     { url: `${profile.url}/`, lastModified: new Date(), changeFrequency: "monthly", priority: 1 },
+    { url: `${profile.url}/blog/`, lastModified: new Date(posts[0]?.date ?? Date.now()), changeFrequency: "monthly", priority: 0.8 },
     ...posts.map((post) => ({
       url: `${profile.url}/blog/${post.slug}/`,
       lastModified: new Date(post.date),

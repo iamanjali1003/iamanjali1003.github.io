@@ -2,27 +2,28 @@ import type { Metadata, Viewport } from "next"
 import { Inter } from "next/font/google"
 
 import { ThemeProvider } from "@/components/layout/theme-provider"
-import { TooltipProvider } from "@/components/ui/tooltip"
 import { profile } from "@/content/profile"
+import { SITE_IMAGE } from "@/lib/og"
 
 import "./globals.css"
 
 // Inter's optical-size axis switches large text, like the name, to its display cut.
 const inter = Inter({ subsets: ["latin"], axes: ["opsz"], variable: "--font-inter", display: "swap" })
 
-const ogImage = { url: "/og-image.png", width: 1200, height: 630, alt: "Anjali, software engineering student" }
-
 export const metadata: Metadata = {
   metadataBase: new URL(profile.url),
   title: profile.name,
   description:
-    "Anjali is a software engineering student in Bengaluru who builds full-stack products with React, Next.js, Node.js, Java and Spring Boot on AWS.",
+    "Anjali is a software engineering student in Bengaluru and a Kubernetes contributor who builds full-stack products with React, Next.js, Node.js, Java and Spring Boot on AWS.",
   keywords: [
-    "Anjali", "software engineering student", "full stack developer", "software engineer intern",
-    "React", "Next.js", "Node.js", "Java", "Spring Boot", "AWS", "MongoDB", "Bengaluru",
+    "Anjali", "software engineering student", "full stack developer", "software engineer", "Kubernetes",
+    "open source", "React", "Next.js", "Node.js", "Java", "Spring Boot", "AWS", "Bengaluru",
   ],
   authors: [{ name: profile.name }],
-  alternates: { canonical: "/" },
+  alternates: {
+    canonical: "/",
+    types: { "application/rss+xml": [{ url: "/feed.xml", title: `${profile.name} · Writing` }] },
+  },
   robots: { index: true, follow: true, googleBot: { "max-image-preview": "large" } },
   openGraph: {
     type: "website",
@@ -31,13 +32,13 @@ export const metadata: Metadata = {
     locale: "en_IN",
     title: profile.name,
     description: profile.description,
-    images: [ogImage],
+    images: [SITE_IMAGE],
   },
   twitter: {
     card: "summary_large_image",
     title: profile.name,
     description: profile.description,
-    images: [ogImage],
+    images: [SITE_IMAGE],
   },
 }
 
@@ -53,14 +54,14 @@ const person = {
   "@type": "Person",
   name: profile.name,
   url: `${profile.url}/`,
-  image: `${profile.url}/og-image.png`,
+  image: `${profile.url}/og.png`,
   jobTitle: profile.role,
-  description: "Software engineering student in Bengaluru.",
+  description: "Software engineering student in Bengaluru and Kubernetes contributor.",
   email: `mailto:${profile.email}`,
   address: { "@type": "PostalAddress", addressLocality: "Bengaluru", addressRegion: "Karnataka", addressCountry: "IN" },
   alumniOf: { "@type": "CollegeOrUniversity", name: "JSS Academy of Technical Education, Bengaluru" },
   knowsAbout: [
-    "Software Engineering", "React", "Next.js", "Node.js", "TypeScript", "Java", "Spring Boot",
+    "Software Engineering", "Kubernetes", "React", "Next.js", "Node.js", "TypeScript", "Java", "Spring Boot",
     "MongoDB", "MySQL", "Apache Kafka", "AWS", "Data Structures and Algorithms",
   ],
   sameAs: [profile.links.github, profile.links.linkedin, profile.links.leetcode, profile.links.codechef],
@@ -69,7 +70,7 @@ const person = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning className={inter.variable}>
-      <body>
+      <body className="flex min-h-dvh flex-col">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <a
             href="#main"
@@ -77,7 +78,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           >
             Skip to content
           </a>
-          <TooltipProvider delayDuration={300}>{children}</TooltipProvider>
+          {children}
         </ThemeProvider>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(person) }} />
       </body>

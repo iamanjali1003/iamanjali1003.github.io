@@ -1,21 +1,15 @@
 import { Section } from "@/components/sections/section"
-import { Badge } from "@/components/ui/badge"
 import { skills } from "@/content/skills"
 
+// Plain lists, not tags: the words are the point.
 export function Skills() {
   return (
     <Section id="skills" title="Skills">
-      <dl className="grid gap-5">
+      <dl className="grid gap-4">
         {skills.map(({ title, items }) => (
-          <div key={title} className="grid gap-2 sm:grid-cols-[8.5rem_minmax(0,1fr)] sm:gap-4">
-            <dt className="text-sm font-medium sm:pt-0.5">{title}</dt>
-            <dd className="flex flex-wrap gap-1.5">
-              {items.map((item) => (
-                <Badge key={item} variant="outline" className="px-2 py-0.5 text-xs font-normal text-foreground">
-                  {item}
-                </Badge>
-              ))}
-            </dd>
+          <div key={title} className="grid gap-1 sm:grid-cols-[8rem_minmax(0,1fr)] sm:gap-6">
+            <dt className="text-[13px] text-muted-foreground sm:pt-px">{title}</dt>
+            <dd className="text-sm leading-relaxed">{items.join(", ")}</dd>
           </div>
         ))}
       </dl>

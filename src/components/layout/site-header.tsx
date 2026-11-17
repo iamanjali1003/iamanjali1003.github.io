@@ -1,43 +1,32 @@
-"use client"
-
-import { FileText } from "lucide-react"
 import Link from "next/link"
 
-import { CommandMenu } from "@/components/layout/command-menu"
-import { MainNav } from "@/components/layout/main-nav"
-import { MobileNav } from "@/components/layout/mobile-nav"
+import { Container } from "@/components/layout/container"
 import { ThemeToggle } from "@/components/layout/theme-toggle"
 import { Mark } from "@/components/shared/mark"
-import { Button } from "@/components/ui/button"
-import { sectionIds } from "@/content/navigation"
 import { profile } from "@/content/profile"
-import { useActiveSection } from "@/hooks/use-active-section"
 
+const navLink = "text-[13px] text-muted-foreground transition-colors hover:text-foreground"
+
+// The name on the left; writing, the resume and the theme on the right.
+// The home page is one short column, so it needs no section menu.
 export function SiteHeader() {
-  const active = useActiveSection(sectionIds)
-
   return (
-    <header className="sticky top-0 z-50 border-b bg-background/80 backdrop-blur-md backdrop-saturate-[1.8]">
-      <div className="mx-auto flex h-14 max-w-4xl items-center gap-4 px-6 max-sm:px-4">
-        <Link href="/#main" className="inline-flex shrink-0 items-center gap-2 text-sm font-semibold tracking-[-0.02em]">
+    <header>
+      <Container className="flex h-16 items-center justify-between">
+        <Link href="/" className="inline-flex items-center gap-2.5 text-sm font-medium tracking-[-0.01em]">
           <Mark className="size-5" />
           {profile.name}
         </Link>
-
-        <MainNav active={active} />
-
-        <div className="ml-auto flex items-center gap-1">
-          <CommandMenu />
+        <nav aria-label="Site" className="flex items-center gap-5">
+          <Link href="/blog/" className={navLink}>
+            Writing
+          </Link>
+          <a href={profile.links.resume} target="_blank" rel="noopener noreferrer" className={navLink}>
+            Resume
+          </a>
           <ThemeToggle />
-          <Button asChild size="sm" className="ml-1 max-sm:hidden">
-            <a href={profile.links.resume} target="_blank" rel="noopener noreferrer">
-              <FileText />
-              Resume
-            </a>
-          </Button>
-          <MobileNav active={active} />
-        </div>
-      </div>
+        </nav>
+      </Container>
     </header>
   )
 }

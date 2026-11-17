@@ -1,20 +1,28 @@
-import { Separator } from "@/components/ui/separator"
+import { Container } from "@/components/layout/container"
 
-// On wide screens the section name sits in a narrow left column and stays in
-// view while its content scrolls; on phones it stacks above the content.
-export function Section({ id, title, children }: { id: string; title: string; children: React.ReactNode }) {
+// A small muted title with a hairline running to the right edge, and an
+// optional link at the end of the line (e.g. "All writing").
+export function Section({
+  id,
+  title,
+  action,
+  children,
+}: {
+  id: string
+  title: string
+  action?: React.ReactNode
+  children: React.ReactNode
+}) {
   return (
-    <section id={id} aria-labelledby={`${id}-heading`} className="mx-auto max-w-4xl px-6 max-sm:px-4">
-      <Separator />
-      <div className="grid gap-6 py-16 md:grid-cols-[9rem_minmax(0,1fr)] md:gap-12 max-sm:py-12">
-        <h2
-          id={`${id}-heading`}
-          className="text-sm font-medium text-muted-foreground md:sticky md:top-20 md:self-start md:pt-px"
-        >
+    <Container as="section" id={id} aria-labelledby={`${id}-heading`} className="mt-20 scroll-mt-6 sm:mt-24">
+      <div className="mb-8 flex items-center gap-4">
+        <h2 id={`${id}-heading`} className="shrink-0 text-[13px] font-medium text-muted-foreground">
           {title}
         </h2>
-        <div>{children}</div>
+        <span aria-hidden="true" className="h-px flex-1 bg-border" />
+        {action}
       </div>
-    </section>
+      {children}
+    </Container>
   )
 }

@@ -1,14 +1,18 @@
 import { Fragment } from "react"
 
+import { TextLink } from "@/components/shared/text-link"
+
+export { TextLink }
+
 // The few pieces a post is written with, styled like the rest of the site:
 // monochrome, square corners, Inter for text and the system mono for code.
 
 export function H2({ children }: { children: React.ReactNode }) {
-  return <h2 className="mt-14 text-xl font-semibold tracking-[-0.02em] text-foreground">{children}</h2>
+  return <h2 className="mt-14 text-[21px] font-semibold tracking-[-0.02em] text-foreground">{children}</h2>
 }
 
 export function P({ children }: { children: React.ReactNode }) {
-  return <p className="mt-5 text-[15px] leading-7 text-foreground/85">{children}</p>
+  return <p className="mt-5 text-base leading-[1.75] text-foreground/85">{children}</p>
 }
 
 export function Code({ children }: { children: React.ReactNode }) {
@@ -26,26 +30,13 @@ export function CodeBlock({ code, label }: { code: string; label?: string }) {
   )
 }
 
-// Links to other sites open in a new tab; links within the site do not.
-export function TextLink({ href, children }: { href: string; children: React.ReactNode }) {
-  return (
-    <a
-      href={href}
-      {...(href.startsWith("http") && { target: "_blank", rel: "noopener noreferrer" })}
-      className="text-foreground underline decoration-border underline-offset-[3px] transition-colors hover:decoration-foreground"
-    >
-      {children}
-    </a>
-  )
-}
-
 export function List({ items }: { items: React.ReactNode[] }) {
   return (
     <ul className="mt-5 space-y-3">
       {items.map((item, i) => (
         <li
           key={i}
-          className="relative pl-[18px] text-[15px] leading-7 text-foreground/85 before:absolute before:top-[12px] before:left-[3px] before:size-1 before:bg-muted-foreground/60 before:content-['']"
+          className="relative pl-[18px] text-base leading-[1.75] text-foreground/85 before:absolute before:top-[0.78em] before:left-[3px] before:size-1 before:bg-muted-foreground/60 before:content-['']"
         >
           {item}
         </li>

@@ -4,9 +4,10 @@ export const profile = {
   headline:
     "I build full-stack software, from React and Next.js front ends to Java and Node.js services on AWS.",
   about:
-    "Final-year Information Science & Engineering student at JSS Academy of Technical Education, Bengaluru, graduating in 2027. Open to SDE internships and new-grad roles.",
+    "Final-year Information Science & Engineering student at JSS Academy of Technical Education, Bengaluru, graduating in 2027. I contribute to Kubernetes, and I'm open to SDE internships and new-grad roles.",
   description:
-    "Software engineering student in Bengaluru. Full-stack products with React, Next.js, Node.js, Java and Spring Boot on AWS.",
+    "Software engineering student in Bengaluru and Kubernetes contributor. Full-stack products with React, Next.js, Node.js, Java and Spring Boot on AWS.",
+  location: "Bengaluru",
   email: "iamanjali1003@gmail.com",
   url: "https://iamanjali1003.github.io",
   links: {
@@ -16,5 +17,5 @@ export const profile = {
     leetcode: "https://leetcode.com/u/iamanjali1003",
     codechef: "https://www.codechef.com/users/iamanjali1003",
   },
-  contact: "Open to SDE internships and new-grad roles. Email is the fastest way to reach me.",
+  contact: "Email is the fastest way to reach me.",
 }

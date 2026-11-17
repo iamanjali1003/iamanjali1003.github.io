@@ -5,6 +5,7 @@ const github = (repo: string) => `https://github.com/iamanjali1003/${repo}`
 export const projects: Entry[] = [
   {
     title: "pixStory",
+    summary: "A shared photo gallery, deployed on AWS.",
     href: github("pixstory"),
     action: { label: "Source", href: github("pixstory") },
     tech: ["React", "TypeScript", "Node.js", "Express", "MongoDB", "AWS"],
@@ -16,6 +17,7 @@ export const projects: Entry[] = [
   },
   {
     title: "datacheck",
+    summary: "A command-line tool that validates CSV files against rules written in YAML.",
     href: github("datacheck"),
     action: { label: "Source", href: github("datacheck") },
     tech: ["Java 21", "Maven", "JUnit 5", "GitHub Actions"],
@@ -27,6 +29,7 @@ export const projects: Entry[] = [
   },
   {
     title: "monoCV",
+    summary: "A free, ATS-friendly resume builder with PDF export.",
     href: github("monocv"),
     action: { label: "Source", href: github("monocv") },
     tech: ["Next.js", "TypeScript", "Tailwind CSS", "shadcn/ui", "Zustand", "Zod"],
@@ -38,8 +41,8 @@ export const projects: Entry[] = [
   },
   {
     title: "Midas",
+    summary: "A Spring Boot service that processes transactions from Kafka, built for the JPMorgan Chase software engineering simulation.",
     href: github("forage-midas"),
-    context: "JPMorgan Chase software engineering simulation",
     action: { label: "Certificate", href: "https://drive.google.com/file/d/1I1JZLDGKprwv0Qwg48M_Yq4-xte1_kWC/view" },
     tech: ["Java", "Spring Boot", "Kafka", "JPA"],
     points: [
@@ -50,6 +53,7 @@ export const projects: Entry[] = [
   },
   {
     title: "Student Attendance Management System",
+    summary: "A MySQL database for tracking student attendance.",
     href: github("student-attendance-management-system"),
     action: { label: "Source", href: github("student-attendance-management-system") },
     tech: ["MySQL 8.0", "SQL", "Stored Procedures", "Triggers"],

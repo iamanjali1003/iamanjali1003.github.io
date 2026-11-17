@@ -1,5 +1,7 @@
 import { Fragment, type ReactNode } from "react"
 
+import { TextLink } from "@/components/shared/text-link"
+
 // Renders the two pieces of markup the content files use:
 //   **bold**  and  [label](https://link)
 const TOKEN = /(\[(?:\*\*[^*]+\*\*|[^\]])+\]\([^)\s]+\)|\*\*[^*]+\*\*)/g
@@ -20,15 +22,9 @@ function render(text: string): ReactNode[] {
       const link = part.match(LINK)
       if (link) {
         return (
-          <a
-            key={i}
-            href={link[2]}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-foreground underline decoration-border underline-offset-[3px] transition-colors hover:decoration-foreground"
-          >
+          <TextLink key={i} href={link[2]}>
             {render(link[1])}
-          </a>
+          </TextLink>
         )
       }
       return <Fragment key={i}>{part}</Fragment>

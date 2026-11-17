@@ -1,5 +1,4 @@
 @import "tailwindcss";
-@import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -84,10 +83,9 @@
   }
   html {
     scroll-behavior: smooth;
-    scroll-padding-top: 72px;
   }
   body {
-    @apply bg-background font-sans text-sm text-foreground antialiased;
+    @apply bg-background font-sans text-[15px] text-foreground antialiased;
     font-feature-settings: "cv11", "ss01";
   }
   :focus-visible {

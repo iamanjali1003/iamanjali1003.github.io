@@ -9,17 +9,29 @@ export type Link = {
 export type Entry = {
   title: string
   href?: string
-  /** A line under the title, e.g. the programme a project was built for. */
-  context?: string
-  badge?: { label: string; solid?: boolean }
+  /** One plain sentence under the title: what the thing is. */
+  summary?: string
   date?: string
-  /** A link in the top-right corner, e.g. Visit, Source, Certificate. */
+  /** A link on the right of the title, e.g. Source or Certificate. */
   action?: Link
   /** rich */
   subtitle?: string
   tech?: string[]
   /** rich */
   points: string[]
+}
+
+export type Contribution = {
+  /** owner/name, as GitHub shows it. */
+  repo: string
+  /** What the change did, in plain words rather than the PR's commit-style title. */
+  title: string
+  href: string
+  status: "merged" | "open"
+  /** Month it merged, or opened if it is still open, e.g. Nov 2026. */
+  date: string
+  /** A short label after the repo, e.g. the event it was part of. */
+  note?: Link
 }
 
 export type Post = {
