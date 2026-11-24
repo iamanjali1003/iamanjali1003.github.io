@@ -1,0 +1,105 @@
+---
+title: "Suspended is not degraded: my first Headlamp PR"
+description: "Why Headlamp's Workloads overview called paused CronJobs degraded, how I fixed it, and what a reviewer and an accessibility check added along the way."
+date: "2026-11-25"
+---
+
+My third Kubernetes pull request, and my first in front-end code, changed how one chart counts paused jobs. The code change was small. Most of what I learned came after I opened the PR: from a reviewer who tested it, and from an accessibility check that failed.
+
+## The tool
+
+[Headlamp](https://github.com/kubernetes-sigs/headlamp) is a web UI for Kubernetes. Its Workloads overview shows one ring chart per workload type (Pods, Deployments, CronJobs, Jobs and so on), with each item coloured by health: healthy, degraded, failed, or in between.
+
+## The problem
+
+A Headlamp user opened [#8339](https://github.com/kubernetes-sigs/headlamp/issues/8339). On their clusters, 4 of 6 CronJobs were suspended on purpose. They were triggers that only ran when someone needed them. But the CronJobs card always read "4 Degraded", so a real problem would look exactly like the normal state.
+
+Suspending a CronJob (`spec.suspend: true`) is something an operator does on purpose. It isn't a health problem. A chart that marks it as one is crying wolf.
+
+## Reproduce first
+
+Before I offered to work on it, I checked that I could see the bug myself. I made a kind cluster with one suspended CronJob:
+
+```bash
+kubectl create cronjob suspended-demo --image=busybox --schedule="*/5 * * * *" -- echo hi
+kubectl patch cronjob suspended-demo -p '{"spec":{"suspend":true}}'
+```
+
+The Workloads overview showed it as Degraded. The cause was a few lines in `cronJob.ts`:
+
+```ts title="Before"
+getHealth(): WorkloadHealthCategory {
+  if (this.spec?.suspend) {
+    return 'degraded';
+  }
+  // ...
+}
+```
+
+`job.ts` did the same for a Job with the `Suspended` condition, and so did `jobSet.ts`.
+
+## Choosing the fix
+
+The issue suggested three options: a new `suspended` category, reusing the existing `transitional` category, or leaving suspended items out of the chart. I posted the screenshot on the issue, said I preferred a separate category, and asked whether the maintainers had a preference. Suspended isn't transitional either: nothing is about to change on its own.
+
+The change itself:
+
+- Added `'suspended'` to the `WorkloadHealthCategory` type.
+- `getHealth()` in the CronJob, Job and JobSet classes returns `'suspended'` instead of `'degraded'`.
+- The ring got a blue segment for suspended items, using the theme's `info` colour, and the legend says "1 Suspended".
+- A new translation key, and updated `getHealth` tests for all three classes.
+
+```ts title="After"
+if (this.spec?.suspend) {
+  return 'suspended';
+}
+```
+
+The issue only mentioned CronJobs and Jobs. JobSet had the same mapping, so I changed it too and said so in the PR, so a reviewer could push back if they disagreed.
+
+## What the reviewer found
+
+Another contributor, [9p-tech](https://github.com/9p-tech), tested the PR on a minikube cluster the day I opened it. The colours were right, but they noticed something I had only asked about in my PR notes: the percentage in the middle of the ring still divided healthy items by all items. A Jobs card with one suspended Job showed **0%**, which still looks broken. That's the same noise the issue was about.
+
+So I changed the percentage to count only the items that aren't suspended, and to show nothing when every item is suspended:
+
+```tsx title="Charts.tsx"
+const active = total - counts.suspended;
+return active > 0 ? getPercentStr(counts.healthy, active) : '';
+```
+
+They tested it again with real numbers:
+
+| Card | Items | Before | After |
+| ---- | ----- | ------ | ----- |
+| CronJobs | 2 healthy, 1 suspended | 66.7% | 100% |
+| Jobs | 3 complete, 1 running, 1 failed, 2 suspended | 42.9% | 60% |
+
+The second row is 3 of 7 before and 3 of 5 after. The 2 suspended Jobs no longer drag the number down, but the failed one still does, which is what you want.
+
+## The accessibility check
+
+Headlamp runs an accessibility check on its Storybook stories in CI. I had added two stories for the chart: one where every CronJob is suspended, and one with a healthy CronJob next to a suspended one. Both failed on **colour contrast**.
+
+The small breakdown line under the count ("1 Suspended") was faded with `opacity: 0.7`. Opacity mixes the text with the background behind it, so the text gets lighter and drops below the contrast that small text needs to stay readable.
+
+That line wasn't new. But none of the existing chart stories had shown it, because they were all Deployments and StatefulSets, which don't get a breakdown. My stories were the first to put that text in front of the check.
+
+The fix was to use the theme's secondary text colour instead of fading the text:
+
+```tsx title="Charts.tsx"
+sx={{ display: 'block', fontSize: '0.85em', color: 'text.secondary' }}
+```
+
+The theme's text colours are chosen to stay readable, so the line still looks secondary without failing the check.
+
+## Merged
+
+The PR passed all 19 checks, and a maintainer, [illume](https://github.com/illume), merged [#8486](https://github.com/kubernetes-sigs/headlamp/pull/8486) on 24 November, a week after I opened it.
+
+## What I'd tell myself a week ago
+
+- **Reproduce before you claim.** A screenshot of the bug on my own cluster made my comment on the issue useful, not just "can I work on this?".
+- **When an issue offers options, say which one you'd pick and why**, then leave room for the maintainers to choose another.
+- **A reviewer who runs your code is a gift.** The percentage fix, the part that makes the chart actually read right, came from someone testing it, not from me.
+- **Stories are tests too.** A new Storybook story can expose an old problem. That's the check working, not a reason to drop the story.
