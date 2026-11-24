@@ -6,5 +6,5 @@ export const skills: SkillGroup[] = [
   { title: "Frontend", items: ["React", "Next.js", "Tailwind CSS", "shadcn/ui", "Zustand", "Zod"] },
   { title: "Databases", items: ["MySQL", "PostgreSQL", "MongoDB", "Spring Data JPA", "Mongoose"] },
   { title: "Cloud", items: ["AWS S3", "CloudFront", "Elastic Beanstalk", "EC2", "IAM"] },
-  { title: "Tools & testing", items: ["Git", "GitHub Actions (CI/CD)", "Docker", "Maven", "JUnit 5"] },
+  { title: "Tools & testing", items: ["Git", "GitHub Actions (CI/CD)", "Docker", "Maven", "JUnit 5", "pytest"] },
 ]

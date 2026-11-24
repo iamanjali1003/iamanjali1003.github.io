@@ -6,11 +6,9 @@ import { Hero } from "@/components/home/hero"
 import { ContributionList } from "@/components/open-source/contribution-list"
 import { ProjectCard } from "@/components/projects/project-card"
 import { ResumeEntry } from "@/components/resume/resume-entry"
-import { SkillGroups } from "@/components/resume/skill-groups"
 import { TitledCard } from "@/components/resume/titled-card"
 import { JsonLd } from "@/components/shared/json-ld"
 import { SectionHeading } from "@/components/shared/section-heading"
-import { Card } from "@/components/ui/card"
 import { pages } from "@/config/pages"
 import { siteConfig } from "@/config/site"
 import { education } from "@/content/education"
@@ -37,7 +35,12 @@ export default function HomePage() {
       <JsonLd graph={[websiteSchema(), personSchema()]} />
       <Hero />
 
-      <section aria-labelledby="featured-projects" className="mt-6">
+      <section aria-labelledby="open-source" className="mt-6">
+        <SectionHeading id="open-source" title="Open source" href={pages.openSource.path} />
+        <ContributionList items={contributions.slice(0, 3)} />
+      </section>
+
+      <section aria-labelledby="featured-projects" className="mt-20">
         <SectionHeading id="featured-projects" title="Featured projects" href={pages.projects.path} />
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {projects
@@ -66,18 +69,6 @@ export default function HomePage() {
             </div>
           </TitledCard>
         </div>
-      </section>
-
-      <section aria-labelledby="skills" className="mt-20">
-        <SectionHeading id="skills" title="Skills" />
-        <Card className="p-6">
-          <SkillGroups className="md:grid-cols-2 md:gap-x-10" />
-        </Card>
-      </section>
-
-      <section aria-labelledby="open-source" className="mt-20">
-        <SectionHeading id="open-source" title="Open source" href={pages.openSource.path} />
-        <ContributionList items={contributions.slice(0, 3)} />
       </section>
 
       {posts.length > 0 && (

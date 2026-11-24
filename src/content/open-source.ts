@@ -12,7 +12,7 @@ export const contributions: Contribution[] = [
     number: 8486,
     title: "Show suspended CronJobs and Jobs as suspended, not degraded",
     href: "https://github.com/kubernetes-sigs/headlamp/pull/8486",
-    status: "open",
+    status: "merged",
     date: "Nov 2026",
     group: "Kubernetes SIGs",
   },

@@ -13,8 +13,8 @@ export const projects: Project[] = [
     tech: ["React", "TypeScript", "Node.js", "Express", "MongoDB", "AWS"],
     points: [
       "**Deployed** a photo gallery on **AWS Elastic Beanstalk**, serving the React app and REST API from one origin",
-      "Designed direct-to-**S3** uploads with **presigned URLs** so image bytes bypass the server, delivered over a **CloudFront** CDN fronting a private bucket locked by Origin Access Control",
-      "Implemented **JWT** auth with bcrypt and full-text search on MongoDB text indexes, and made likes **atomic** ($addToSet/$pull) to remove a race between concurrent users",
+      "Designed direct-to-**S3** uploads with **presigned URLs** that skip the server, served via a **CloudFront** CDN",
+      "Implemented **JWT** auth and MongoDB full-text search, and made likes **atomic** to prevent race conditions",
     ],
   },
   {
@@ -26,7 +26,7 @@ export const projects: Project[] = [
     tech: ["Java 21", "Maven", "JUnit 5", "GitHub Actions"],
     points: [
       "Built a **CLI** that validates CSV files against YAML rules and exits non-zero on failure, so it can gate a **CI** build",
-      "Designed a plugin architecture on Java’s **ServiceLoader**: **5 validation rules** and **4 report formats** (text, JSON, HTML, LaTeX) are discovered at runtime, so adding one never touches the engine",
+      "Designed a **plugin system** for **5 validation rules** and **4 report formats**, so new ones need no core changes",
       "Covered the parser, engine, rules and reporters with **35 JUnit 5 tests**, run on every push by **GitHub Actions**",
     ],
   },
@@ -51,9 +51,8 @@ export const projects: Project[] = [
     links: [{ label: "Certificate", href: "https://drive.google.com/file/d/1I1JZLDGKprwv0Qwg48M_Yq4-xte1_kWC/view" }],
     tech: ["Java", "Spring Boot", "Kafka", "JPA"],
     points: [
-      "Integrated **Kafka**, H2 persistence and a REST Incentive API into one **Spring Boot** microservice",
+      "Integrated **Kafka**, an H2 database and a **REST API** into one **Spring Boot** microservice",
       "Wrote Kafka consumers that deserialize and validate transactions, tested against **embedded Kafka**",
-      "Built a **REST** endpoint, GET /balance, that returns a user's balance as JSON from the database",
     ],
   },
   {
